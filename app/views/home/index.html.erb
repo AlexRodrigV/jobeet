@@ -1,2 +1,7 @@
 <h1>Hello, Rails!</h1>
+<% User.all.each do |user| %>
+  <p><%= user.name %></p>
+  <p><%= user.email %></p>
+<% end %>
 <%= link_to 'My Blog', controller: 'offers' %>
+<%= link_to 'Sign In', 'http://localhost:3000/auth/google_oauth2' %>
