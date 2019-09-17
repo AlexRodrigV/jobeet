@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_14_164301) do
+ActiveRecord::Schema.define(version: 2019_09_17_173906) do
+
+  create_table "global_data", force: :cascade do |t|
+    t.boolean "isConnected"
+    t.string "Username"
+    t.string "Email"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "offers", force: :cascade do |t|
     t.string "title"

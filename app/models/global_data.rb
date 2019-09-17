@@ -1,0 +1,2 @@
+class GlobalData < ApplicationRecord
+end

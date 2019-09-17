@@ -1,7 +1,10 @@
-<h1>Hello, Rails!</h1>
-<% User.all.each do |user| %>
-  <p><%= user.name %></p>
-  <p><%= user.email %></p>
+<h1> Hello, <%= @var.isConnected ? @var.Username : "unknown beautiful user"%> ! </h1>
+
+<% if !@var.isConnected %>
+  <p> Sign In in order to discover a world full of magic.... ;) </p>
+  <%= link_to 'Sign In', 'http://localhost:3000/auth/google_oauth2' %>
+<% else %>
+  <p> That's my boy !</p>
+  <%= link_to 'My Blog', controller: 'offers' %>
+  <%= link_to "Sign out", '#', :onclick=>signout %>
 <% end %>
-<%= link_to 'My Blog', controller: 'offers' %>
-<%= link_to 'Sign In', 'http://localhost:3000/auth/google_oauth2' %>
