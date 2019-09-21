@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_17_173906) do
+ActiveRecord::Schema.define(version: 2019_09_21_103227) do
 
   create_table "global_data", force: :cascade do |t|
     t.boolean "isConnected"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2019_09_17_173906) do
     t.string "Email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "role"
   end
 
   create_table "offers", force: :cascade do |t|

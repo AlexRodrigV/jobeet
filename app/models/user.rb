@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   def self.from_omniauth(auth)
     @var = GlobalData.find(1)
-    @var.update_attributes('isConnected': true, 'Username': auth.info.name, 'Email': auth.info.email)
+    @var.update_columns('isConnected': true, 'Username': auth.info.name, 'Email': auth.info.email)
     # Creates a new user only if it doesn't exist
     where(email: auth.info.email).first_or_initialize do |user|
       user.name = auth.info.name
