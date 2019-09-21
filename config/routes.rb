@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'profil/index'
   get 'home/index'
   get 'sessions/index'
   # Routes for Google authentication

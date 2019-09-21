@@ -1,3 +1,5 @@
+<%= render 'navbar' %>
+
 <h1> Hello, <%= @var.isConnected ? @var.Username : "unknown beautiful user"%> ! </h1>
 <% if !@var.isConnected %>
   <p> Sign In in order to discover a world full of magic.... ;) </p>
@@ -7,7 +9,14 @@
 <% else %>
   <p> That's my boy !</p>
   <%= link_to 'My Blog', controller: 'offers' %>
-  <%= link_to "Sign out", root_path , :onclick=>signout %>
+  <%= link_to "Sign out", root_path , :onclick =>signout_fct() %>
+  <%= javascript_tag do %>
+    function signout_fct() {
+        $.post('/ajax/signout.json', {},
+        function(data) {
+        });
+    }
+<% end %>
 <% end %>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -21,10 +30,10 @@
       </div>
       <div class="modal-body text-light">
         <button type="button" class="btn btn-success">
-          <%= link_to 'I\'m an applicant', 'http://localhost:3000/auth/google_oauth2', {:style=>'color:#FFFFFF;', :onclick=>applicant }%>
+          <%= link_to 'I\'m an applicant', 'http://localhost:3000/auth/google_oauth2', {:style=>'color:#FFFFFF;', :onclick =>applicant() }%>
         </button>
         <button type="button" class="btn btn-success">
-          <%= link_to 'I\'m a recruiter', 'http://localhost:3000/auth/google_oauth2', {:style=>'color:#FFFFFF;', :onclick=>recruiter } %>
+          <%= link_to 'I\'m a recruiter', 'http://localhost:3000/auth/google_oauth2', {:style=>'color:#FFFFFF;', :onclick =>recruiter() } %>
         </button>
       </div>
       <div class="modal-footer">
