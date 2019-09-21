@@ -10,7 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_17_173906) do
+ActiveRecord::Schema.define(version: 2019_09_21_084351) do
+
+  create_table "applications", force: :cascade do |t|
+    t.integer "offer_id"
+    t.integer "employee_id"
+  end
+
+  create_table "employees", force: :cascade do |t|
+    t.string "name"
+    t.string "keywords"
+  end
+
+  create_table "enterprises", force: :cascade do |t|
+    t.string "name"
+  end
 
   create_table "global_data", force: :cascade do |t|
     t.boolean "isConnected"
@@ -23,13 +37,17 @@ ActiveRecord::Schema.define(version: 2019_09_17_173906) do
   create_table "offers", force: :cascade do |t|
     t.string "title"
     t.text "text"
+    t.string "keywords"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "recruiter_id"
+    t.index ["recruiter_id"], name: "index_offers_on_recruiter_id"
   end
 
-  create_table "user_mfa_sessions", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table "recruiters", force: :cascade do |t|
+    t.string "name"
+    t.integer "enterprise_id"
+    t.index ["enterprise_id"], name: "index_recruiters_on_enterprise_id"
   end
 
   create_table "users", force: :cascade do |t|
