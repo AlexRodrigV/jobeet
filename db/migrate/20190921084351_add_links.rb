@@ -10,6 +10,9 @@ class AddLinks < ActiveRecord::Migration[6.0]
     add_column :applications, :offer_id, :integer
     add_column :applications, :employee_id, :integer
 
+    add_column :global_data, :recruiter_id, :integer
+    add_column :global_data, :employee_id, :integer
+
 
   end
 end

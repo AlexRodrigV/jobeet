@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_21_084351) do
+ActiveRecord::Schema.define(version: 2019_09_21_121109) do
 
   create_table "applications", force: :cascade do |t|
     t.integer "offer_id"
@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(version: 2019_09_21_084351) do
     t.string "Email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "recruiter_id"
+    t.integer "employee_id"
     t.integer "role"
     t.boolean "reset"
   end
