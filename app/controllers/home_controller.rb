@@ -15,7 +15,9 @@ class HomeController < ApplicationController
       helper_method :recruiter
 
       def signout
+        redirect_to :controller => 'home', :action => 'index'
         @var.update('isConnected': false, 'Username': "toto", 'Email': "@", 'role': 0, 'reset': true)
+        return
       end
 
       helper_method :signout

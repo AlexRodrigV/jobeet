@@ -6,7 +6,7 @@ class User < ApplicationRecord
     where(email: auth.info.email).first_or_initialize do |user|
       user.name = auth.info.name
       user.email = auth.info.email
-      user.image = auth.info.email
+      user.image = auth.info.image
     end
   end
 end

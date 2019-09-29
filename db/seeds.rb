@@ -8,7 +8,8 @@
 
 Application.create
 
-GlobalData.create(isConnected: false, Username: 'toto', Email: '@', role: 0, reset: false, recruiter_id: 1)
+GlobalData.create(isConnected: false, Username: 'toto', Email: '@', role: 0, reset: false, recruiter_id: 1, image: "")
+User.create(name: "toto", email:"@", image: "", description: "Empty", hobbies: "TODO", company: "TODO", street: "TODO", city: "TODO", state:"TODO", resume:"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
 Enterprise.create name:'Google'
 Recruiter.create name:'Recruiter 1', enterprise_id:1
 Offer.create title:"testOffer", recruiter_id:1

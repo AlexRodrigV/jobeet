@@ -16,16 +16,24 @@
             </ul>
             <div class="tab-content py-4">
                 <div class="tab-pane active" id="profile">
-                    <h1 class="mb-3">User Profile</h1>
+                    <h1 class="mb-3"><%= @currentUser.name %></h1>
                     <div class="row">
                         <div class="col-md-6">
-                            <h2><%= @var.Username %></h2>
+                            <h5><strong>Description</strong></h5>
                             <p>
                                 Web Designer, UI/UX Engineer
                             </p>
-                            <h6>Hobbies</h6>
+                            <h5><strong>Hobbies</strong></h5>
                             <p>
                                 Indie music, skiing and hiking. I love the great outdoors.
+                            </p>
+                            <h5><strong>Company</strong></h5>
+                            <p>
+                                Epita
+                            </p>
+                            <h5><strong>Address</strong></h5>
+                            <p>
+                                Epita
                             </p>
                         </div>
                         <div class="col-md-6">
@@ -41,101 +49,54 @@
                             <hr>
                         </div>
                         <div class="col-md-12">
-                            <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span> Resume</h5>
-                            <table class="table table-sm table-hover table-striped">
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <strong>Abby</strong> joined ACME Project Team in <strong>`Collaboration`</strong>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>Gary</strong> deleted My Board1 in <strong>`Discussions`</strong>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>Kensington</strong> deleted MyBoard3 in <strong>`Discussions`</strong>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>John</strong> deleted My Board1 in <strong>`Discussions`</strong>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>Skell</strong> deleted his post Look at Why this is.. in <strong>`Discussions`</strong>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span><strong>Resume</strong></h5>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                         </div>
                     </div>
                     <!--/row-->
                 </div>
                 <div class="tab-pane" id="messages">
-                    <div class="alert alert-info alert-dismissable">
-                        <a class="panel-close close" data-dismiss="alert">×</a> This is an <strong>.alert</strong>. Use this to show important messages to the user.
-                    </div>
-                    <table class="table table-hover table-striped">
-                        <tbody>
-                            <tr>
-                                <td>
-                                   <span class="float-right font-weight-bold">3 hrs ago</span> Here is your a link to the latest summary report from the..
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                   <span class="float-right font-weight-bold">Yesterday</span> There has been a request on your account since that was..
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                   <span class="float-right font-weight-bold">9/10</span> Porttitor vitae ultrices quis, dapibus id dolor. Morbi venenatis lacinia rhoncus.
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                   <span class="float-right font-weight-bold">9/4</span> Vestibulum tincidunt ullamcorper eros eget luctus.
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                   <span class="float-right font-weight-bold">9/4</span> Maxamillion ais the fix for tibulum tincidunt ullamcorper eros.
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                 </div>
                 <div class="tab-pane" id="edit">
                     <form role="form">
                         <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Company</label>
+                            <label class="col-lg-3 col-form-label form-control-label">Description</label>
                             <div class="col-lg-9">
-                                <input class="form-control" type="text" value="">
+                                <input class="form-control" type="text" value=<%= @currentUser.description %>>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Website</label>
+                            <label class="col-lg-3 col-form-label form-control-label">Hobbies</label>
                             <div class="col-lg-9">
-                                <input class="form-control" type="url" value="">
+                                <input class="form-control" type="text" value=<%= @currentUser.hobbies %>>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Company</label>
+                            <div class="col-lg-9">
+                                <input class="form-control" type="text" value=<%= @currentUser.company %>>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Address</label>
                             <div class="col-lg-9">
-                                <input class="form-control" type="text" value="" placeholder="Street">
+                                <input class="form-control" type="text" value=<%= @currentUser.street %> placeholder="Street">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label"></label>
                             <div class="col-lg-6">
-                                <input class="form-control" type="text" value="" placeholder="City">
+                                <input class="form-control" type="text" value=<%= @currentUser.city %> placeholder="City">
                             </div>
                             <div class="col-lg-3">
-                                <input class="form-control" type="text" value="" placeholder="State">
+                                <input class="form-control" type="text" value=<%= @currentUser.state %> placeholder="State">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Resume</label>
+                            <div class="col-lg-9">
+                                <input class="form-control" type="text" value=<%= @currentUser.resume %>>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -149,7 +110,7 @@
             </div>
         </div>
         <div class="col-lg-4 order-lg-1 text-center">
-            <img src="//placehold.it/150" class="mx-auto img-fluid img-circle d-block" alt="avatar">
+            <img src=<%= @currentUser.image %> style="max-width:75%;" class="mx-auto img-circle d-block" alt="avatar">
         </div>
     </div>
 </div>

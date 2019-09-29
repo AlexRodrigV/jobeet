@@ -9,7 +9,6 @@
 <% else %>
   <p> That's my boy !</p>
   <%= link_to 'My Blog', controller: 'offers' %>
-  <a href=<%= root_path %> id="signout_fct">Sign Out</a>
 <% end %>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -38,12 +37,6 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
-    $('#signout_fct').click(function(evt) {
-      evt.preventDefault();
-      var $self = $(this);
-      $.post('/home/signout', function(response) {
-      });
-    });
     $('#applicant_fct').click(function(evt) {
       evt.preventDefault();
       var $self = $(this);

@@ -30,13 +30,13 @@ ActiveRecord::Schema.define(version: 2019_09_29_131137) do
     t.boolean "isConnected"
     t.string "Username"
     t.string "Email"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.integer "recruiter_id"
     t.integer "employee_id"
     t.integer "role"
     t.boolean "reset"
     t.string "image"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "offers", force: :cascade do |t|
@@ -62,9 +62,16 @@ ActiveRecord::Schema.define(version: 2019_09_29_131137) do
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
+    t.string "image"
+    t.string "description"
+    t.string "hobbies"
+    t.string "company"
+    t.string "street"
+    t.string "city"
+    t.string "state"
+    t.string "resume"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "image"
   end
 
 end
