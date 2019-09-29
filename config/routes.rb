@@ -13,6 +13,10 @@ Rails.application.routes.draw do
   get 'auth/:provider/callback', to: 'sessions#googleAuth'
   get 'auth/failure', to: redirect('/')
 
+  post 'home/signout' => 'home#signout'
+  post 'home/applicant' => 'home#applicant'
+  post 'home/recruiter' => 'home#recruiter'
+
   resources :offers
   resources :users
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_21_121109) do
+ActiveRecord::Schema.define(version: 2019_09_29_131137) do
 
   create_table "applications", force: :cascade do |t|
     t.integer "offer_id"
@@ -36,12 +36,12 @@ ActiveRecord::Schema.define(version: 2019_09_21_121109) do
     t.integer "employee_id"
     t.integer "role"
     t.boolean "reset"
+    t.string "image"
   end
 
   create_table "offers", force: :cascade do |t|
     t.string "title"
     t.text "text"
-    t.string "keywords"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "recruiter_id"
@@ -54,11 +54,17 @@ ActiveRecord::Schema.define(version: 2019_09_21_121109) do
     t.index ["enterprise_id"], name: "index_recruiters_on_enterprise_id"
   end
 
+  create_table "user_mfa_sessions", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "image"
   end
 
 end

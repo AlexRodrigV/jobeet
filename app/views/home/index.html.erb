@@ -9,14 +9,7 @@
 <% else %>
   <p> That's my boy !</p>
   <%= link_to 'My Blog', controller: 'offers' %>
-  <%= link_to "Sign out", root_path , :onclick =>signout_fct() %>
-  <%= javascript_tag do %>
-    function signout_fct() {
-        $.post('/ajax/signout.json', {},
-        function(data) {
-        });
-    }
-<% end %>
+  <a href=<%= root_path %> id="signout_fct">Sign Out</a>
 <% end %>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -30,10 +23,10 @@
       </div>
       <div class="modal-body text-light">
         <button type="button" class="btn btn-success">
-          <%= link_to 'I\'m an applicant', 'http://localhost:3000/auth/google_oauth2', {:style=>'color:#FFFFFF;', :onclick =>applicant() }%>
+          <a id="applicant_fct" ><%= link_to 'I\'m an applicant', 'http://localhost:3000/auth/google_oauth2', :style=>'color:#FFFFFF;'%></a>
         </button>
         <button type="button" class="btn btn-success">
-          <%= link_to 'I\'m a recruiter', 'http://localhost:3000/auth/google_oauth2', {:style=>'color:#FFFFFF;', :onclick =>recruiter() } %>
+          <a id="recruiter_fct"><%= link_to 'I\'m an recruiter', 'http://localhost:3000/auth/google_oauth2', :style=>'color:#FFFFFF;' %></a>
         </button>
       </div>
       <div class="modal-footer">
@@ -42,3 +35,26 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#signout_fct').click(function(evt) {
+      evt.preventDefault();
+      var $self = $(this);
+      $.post('/home/signout', function(response) {
+      });
+    });
+    $('#applicant_fct').click(function(evt) {
+      evt.preventDefault();
+      var $self = $(this);
+      $.post('/home/applicant', function(response) {
+      });
+    });
+    $('#recruiter_fct').click(function(evt) {
+      evt.preventDefault();
+      var $self = $(this);
+      $.post('/home/recruiter', function(response) {
+      });
+    });
+  });
+</script>

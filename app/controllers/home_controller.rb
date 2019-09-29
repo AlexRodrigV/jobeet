@@ -2,24 +2,21 @@ class HomeController < ApplicationController
   def index
   end
 
-private
+      def applicant
+        @var.update_columns('role': 1)
+      end
 
-    def applicant
-      @var.update_columns('role': 1)
-      puts("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
-    end
+      helper_method :applicant
 
-    helper_method :applicant
+      def recruiter
+        @var.update_columns('role': 2)
+      end
 
-    def recruiter
-      @var.update_columns('role': 2)
-    end
+      helper_method :recruiter
 
-    helper_method :recruiter
+      def signout
+        @var.update('isConnected': false, 'Username': "toto", 'Email': "@", 'role': 0, 'reset': true)
+      end
 
-    def signout
-      @var.update_columns('reset': false)
-    end
-
-    helper_method :signout
+      helper_method :signout
 end
