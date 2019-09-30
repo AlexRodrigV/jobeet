@@ -1,2 +1,11 @@
-<h1> <%= @offer.title %> </h1>
+<h1><%= @offer.title %></h1>
+<%= form_tag "/enterprise/#{@offer.id}", method:"patch" do %>
+  <p>
+    <input type="text" name="title" value=<%= @offer.title %> />
+  </p>
+  <p><input type="text" name="description" value="<%= @offer.description %>" /></p>
+  <p><input type="text" name="keywords" value="<%= @offer.keywords %>" /></p>
+  <p><input type="submit" value="Modifier l'offre" /></p>
+<% end %>
+
 <p> <a href="/enterprise"> Retourner à la page entreprise </a></p>

@@ -17,4 +17,12 @@ class EnterpriseController < ApplicationController
     @offer = Offer.find(params[:id])
   end
 
+  def update
+    @offer = Offer.find(params[:id])
+    @offer.update title: params[:title]
+    @offer.update description: params[:description]
+    @offer.update keywords: params[:keywords]
+    redirect_to "/enterprise/#{params[:id]}"
+  end
+
 end
