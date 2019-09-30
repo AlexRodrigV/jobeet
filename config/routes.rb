@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   post 'profil' => 'profil#edit'
 
   resources :offers
+  resources :offersalexr
+  resources :annuaire
   resources :users
 
   root 'home#index'

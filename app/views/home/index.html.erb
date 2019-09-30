@@ -3,9 +3,14 @@
 <h1> Hello, <%= @var.isConnected ? @var.Username : "unknown beautiful user"%> ! </h1>
 <% if !@var.isConnected %>
   <p> Sign In in order to discover a world full of magic.... ;) </p>
+<<<<<<< Updated upstream
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
     Sign In
   </button>
+=======
+  <%= link_to 'Sign In', 'http://localhost:3000/auth/google_oauth2' %>
+  <%= link_to 'Test for Alex.R', controller: 'offersalexr' %>
+>>>>>>> Stashed changes
 <% else %>
   <p> That's my boy !</p>
   <%= link_to 'My Blog', controller: 'offers' %>
