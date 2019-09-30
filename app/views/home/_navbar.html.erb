@@ -24,10 +24,9 @@
 <script type="text/javascript">
   $(document).ready(function() {
     $('#signout_fct').click(function(evt) {
-      evt.preventDefault();
       var $self = $(this);
-      console.log("Hey you've click")
       $.post('/home/signout', function(response) {
+        window.location.href="/home/index";
       });
     });
   });

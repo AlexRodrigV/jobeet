@@ -21,11 +21,11 @@
         </button>
       </div>
       <div class="modal-body text-light">
-        <button type="button" class="btn btn-success">
-          <a id="applicant_fct" ><%= link_to 'I\'m an applicant', 'http://localhost:3000/auth/google_oauth2', :style=>'color:#FFFFFF;'%></a>
+        <button type="button" class="btn btn-success" id="applicant_fct">
+          I'm an applicant
         </button>
-        <button type="button" class="btn btn-success">
-          <a id="recruiter_fct"><%= link_to 'I\'m an recruiter', 'http://localhost:3000/auth/google_oauth2', :style=>'color:#FFFFFF;' %></a>
+        <button type="button" class="btn btn-success" id="recruiter_fct">
+          I'm an recruiter
         </button>
       </div>
       <div class="modal-footer">
@@ -38,15 +38,15 @@
 <script type="text/javascript">
   $(document).ready(function() {
     $('#applicant_fct').click(function(evt) {
-      evt.preventDefault();
       var $self = $(this);
       $.post('/home/applicant', function(response) {
+        window.location.href='http://localhost:3000/auth/google_oauth2';
       });
     });
     $('#recruiter_fct').click(function(evt) {
-      evt.preventDefault();
       var $self = $(this);
       $.post('/home/recruiter', function(response) {
+        window.location.href='http://localhost:3000/auth/google_oauth2';
       });
     });
   });

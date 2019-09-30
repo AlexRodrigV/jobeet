@@ -4,6 +4,8 @@ class HomeController < ApplicationController
 
       def applicant
         @var.update_columns('role': 1)
+        redirect_to '/auth/google_oauth2'
+        return
       end
 
       helper_method :applicant
