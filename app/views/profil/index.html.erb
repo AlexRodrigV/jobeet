@@ -1,3 +1,21 @@
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+<link href="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/css/bootstrap-multiselect.css"
+    rel="stylesheet" type="text/css" />
+<script src="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/js/bootstrap-multiselect.js"
+    type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#skillsSelect').multiselect({
+            includeSelectAllOption: true,
+            enableCaseInsensitiveFiltering: true,
+            enableFiltering: true,
+        });
+    });
+</script>
+
 <%= render 'home/navbar' %>
 
 <div class="container">
@@ -63,40 +81,51 @@
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Description</label>
                             <div class="col-lg-9">
-                                <input id="description" class="form-control" type="text" value=<%= @currentUser.description %>>
+                                <input id="description" class="form-control" type="text" value="<%= @currentUser.description %>">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Hobbies</label>
                             <div class="col-lg-9">
-                                <input id="hobbies" class="form-control" type="text" value=<%= @currentUser.hobbies %>>
+                                <input id="hobbies" class="form-control" type="text" value="<%= @currentUser.hobbies %>">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Skills</label>
+                            <div style="padding-left: 20px;">
+                              <select id="skillsSelect" class="selectpicker show-menu-arrow form-control" multiple>
+                                <option>chicken</option>
+                                <option>turkey</option>
+                                <option>duck</option>
+                                <option>goose</option>
+                              </select>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Company</label>
                             <div class="col-lg-9">
-                                <input id="company" class="form-control" type="text" value=<%= @currentUser.company %>>
+                                <input id="company" class="form-control" type="text" value="<%= @currentUser.company %>">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Address</label>
                             <div class="col-lg-9">
-                                <input id="street" class="form-control" type="text" placeholder="Street" value=<%= @currentUser.street %>>
+                                <input id="street" class="form-control" type="text" placeholder="Street" value="<%= @currentUser.street %>">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label"></label>
                             <div class="col-lg-6">
-                                <input id="city" class="form-control" type="text" placeholder="City" value=<%= @currentUser.city %>>
+                                <input id="city" class="form-control" type="text" placeholder="City" value="<%= @currentUser.city %>">
                             </div>
                             <div class="col-lg-3">
-                                <input id="state" class="form-control" type="text" placeholder="State" value=<%= @currentUser.state %>>
+                                <input id="state" class="form-control" type="text" placeholder="State" value="<%= @currentUser.state %>">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Resume</label>
                             <div class="col-lg-9">
-                                <textarea rows="8" cols="80" id="resume" class="form-control" type="text" value=<%= @currentUser.resume %>></textarea>
+                                <textarea rows="8" cols="80" id="resume" class="form-control" type="text"><%= @currentUser.resume %></textarea>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -110,15 +139,21 @@
             </div>
         </div>
         <div class="col-lg-4 order-lg-1 text-center">
-            <img src=<%= @currentUser.image %> style="max-width:75%;" class="mx-auto img-circle d-block" alt="avatar">
+            <img src=<%= @currentUser.image %> style="max-width:75%;" class="mx-auto rounded-circle d-block" alt="avatar">
         </div>
     </div>
 </div>
+
 
 <script type="text/javascript">
   $(document).ready(function() {
     $('#submitBtn').click(function(evt) {
       var $self = $(this);
+      var brands = $('#skillsSelect option:selected');
+      var selected = [];
+      $(brands).each(function(index, brand){
+          selected.push($(this).val());
+      });
       $.post('/profil', {
         description: document.getElementById("description").value,
         hobbies: document.getElementById("hobbies").value,
@@ -129,6 +164,7 @@
         resume: document.getElementById("resume").value
       },function(response) {
         window.location.href="/profil/index";
+        console.log(selected)
       });
     });
   });
