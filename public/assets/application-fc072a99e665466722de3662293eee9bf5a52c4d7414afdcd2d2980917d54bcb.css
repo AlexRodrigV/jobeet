@@ -1,0 +1,158 @@
+/* line 4, app/assets/stylesheets/profil.scss */
+body {
+  margin: 0;
+}
+
+/* line 8, app/assets/stylesheets/profil.scss */
+.bg-profil {
+  background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  padding-top: 50px;
+}
+
+/* line 18, app/assets/stylesheets/profil.scss */
+.emp-profile {
+  padding: 3%;
+  margin-bottom: 3%;
+  border-radius: 0.5rem;
+  background: #fff;
+}
+
+/* line 24, app/assets/stylesheets/profil.scss */
+.profile-img {
+  text-align: center;
+}
+
+/* line 27, app/assets/stylesheets/profil.scss */
+.profile-img img {
+  width: 70%;
+  height: 100%;
+}
+
+/* line 31, app/assets/stylesheets/profil.scss */
+.profile-img .file {
+  position: relative;
+  overflow: hidden;
+  margin-top: -20%;
+  width: 70%;
+  border: none;
+  border-radius: 0;
+  font-size: 15px;
+  background: #212529b8;
+}
+
+/* line 41, app/assets/stylesheets/profil.scss */
+.profile-img .file input {
+  position: absolute;
+  opacity: 0;
+  right: 0;
+  top: 0;
+}
+
+/* line 47, app/assets/stylesheets/profil.scss */
+.profile-head h5 {
+  color: #333;
+}
+
+/* line 50, app/assets/stylesheets/profil.scss */
+.profile-head h6 {
+  color: #0062cc;
+}
+
+/* line 53, app/assets/stylesheets/profil.scss */
+.profile-edit-btn {
+  border: none;
+  border-radius: 1.5rem;
+  width: 70%;
+  padding: 2%;
+  font-weight: 600;
+  color: #6c757d;
+  cursor: pointer;
+}
+
+/* line 62, app/assets/stylesheets/profil.scss */
+.proile-rating {
+  font-size: 12px;
+  color: #818182;
+  margin-top: 5%;
+}
+
+/* line 67, app/assets/stylesheets/profil.scss */
+.proile-rating span {
+  color: #495057;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* line 72, app/assets/stylesheets/profil.scss */
+.profile-head .nav-tabs {
+  margin-bottom: 5%;
+}
+
+/* line 75, app/assets/stylesheets/profil.scss */
+.profile-head .nav-tabs .nav-link {
+  font-weight: 600;
+  border: none;
+}
+
+/* line 79, app/assets/stylesheets/profil.scss */
+.profile-head .nav-tabs .nav-link.active {
+  border: none;
+  border-bottom: 2px solid #0062cc;
+}
+
+/* line 83, app/assets/stylesheets/profil.scss */
+.profile-work {
+  padding: 14%;
+  margin-top: -15%;
+}
+
+/* line 87, app/assets/stylesheets/profil.scss */
+.profile-work p {
+  font-size: 12px;
+  color: #818182;
+  font-weight: 600;
+  margin-top: 10%;
+}
+
+/* line 93, app/assets/stylesheets/profil.scss */
+.profile-work a {
+  text-decoration: none;
+  color: #495057;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* line 99, app/assets/stylesheets/profil.scss */
+.profile-work ul {
+  list-style: none;
+}
+
+/* line 102, app/assets/stylesheets/profil.scss */
+.profile-tab label {
+  font-weight: 600;
+}
+
+/* line 105, app/assets/stylesheets/profil.scss */
+.profile-tab p {
+  font-weight: 600;
+  color: #0062cc;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+
+
+ */
+

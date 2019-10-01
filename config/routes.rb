@@ -21,6 +21,11 @@ Rails.application.routes.draw do
   post 'home/applicant' => 'home#applicant'
   post 'home/recruiter' => 'home#recruiter'
 
+  post 'profil' => 'profil#edit'
+
+  resources :offers
+  resources :offersalexr
+  resources :annuaire
   resources :users
 
   root 'home#index'

@@ -1,3 +1,21 @@
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+<link href="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/css/bootstrap-multiselect.css"
+    rel="stylesheet" type="text/css" />
+<script src="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/js/bootstrap-multiselect.js"
+    type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#skillsSelect').multiselect({
+            includeSelectAllOption: true,
+            enableCaseInsensitiveFiltering: true,
+            enableFiltering: true,
+        });
+    });
+</script>
+
 <%= render 'home/navbar' %>
 
 <div class="container">
@@ -21,19 +39,19 @@
                         <div class="col-md-6">
                             <h5><strong>Description</strong></h5>
                             <p>
-                                Web Designer, UI/UX Engineer
+                              <%= @currentUser.description %>
                             </p>
                             <h5><strong>Hobbies</strong></h5>
                             <p>
-                                Indie music, skiing and hiking. I love the great outdoors.
+                              <%= @currentUser.hobbies %>
                             </p>
                             <h5><strong>Company</strong></h5>
                             <p>
-                                Epita
+                              <%= @currentUser.company %>
                             </p>
                             <h5><strong>Address</strong></h5>
                             <p>
-                                Epita
+                                <%= @currentUser.street %>, <%= @currentUser.city %>, <%= @currentUser.state %>
                             </p>
                         </div>
                         <div class="col-md-6">
@@ -50,7 +68,7 @@
                         </div>
                         <div class="col-md-12">
                             <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span><strong>Resume</strong></h5>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            <%= @currentUser.resume %>
                         </div>
                     </div>
                     <!--/row-->
@@ -63,46 +81,57 @@
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Description</label>
                             <div class="col-lg-9">
-                                <input class="form-control" type="text" value=<%= @currentUser.description %>>
+                                <input id="description" class="form-control" type="text" value="<%= @currentUser.description %>">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Hobbies</label>
                             <div class="col-lg-9">
-                                <input class="form-control" type="text" value=<%= @currentUser.hobbies %>>
+                                <input id="hobbies" class="form-control" type="text" value="<%= @currentUser.hobbies %>">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Skills</label>
+                            <div style="padding-left: 20px;">
+                              <select id="skillsSelect" class="selectpicker show-menu-arrow form-control" multiple>
+                                <option>chicken</option>
+                                <option>turkey</option>
+                                <option>duck</option>
+                                <option>goose</option>
+                              </select>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Company</label>
                             <div class="col-lg-9">
-                                <input class="form-control" type="text" value=<%= @currentUser.company %>>
+                                <input id="company" class="form-control" type="text" value="<%= @currentUser.company %>">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Address</label>
                             <div class="col-lg-9">
-                                <input class="form-control" type="text" value=<%= @currentUser.street %> placeholder="Street">
+                                <input id="street" class="form-control" type="text" placeholder="Street" value="<%= @currentUser.street %>">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label"></label>
                             <div class="col-lg-6">
-                                <input class="form-control" type="text" value=<%= @currentUser.city %> placeholder="City">
+                                <input id="city" class="form-control" type="text" placeholder="City" value="<%= @currentUser.city %>">
                             </div>
                             <div class="col-lg-3">
-                                <input class="form-control" type="text" value=<%= @currentUser.state %> placeholder="State">
+                                <input id="state" class="form-control" type="text" placeholder="State" value="<%= @currentUser.state %>">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Resume</label>
                             <div class="col-lg-9">
-                                <input class="form-control" type="text" value=<%= @currentUser.resume %>>
+                                <textarea rows="8" cols="80" id="resume" class="form-control" type="text"><%= @currentUser.resume %></textarea>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label"></label>
                             <div class="col-lg-9">
-                                <input type="button" class="btn btn-primary" value="Save Changes">
+                                <input id="submitBtn" type="button" class="btn btn-primary" value="Save Changes">
                             </div>
                         </div>
                     </form>
@@ -110,7 +139,33 @@
             </div>
         </div>
         <div class="col-lg-4 order-lg-1 text-center">
-            <img src=<%= @currentUser.image %> style="max-width:75%;" class="mx-auto img-circle d-block" alt="avatar">
+            <img src=<%= @currentUser.image %> style="max-width:75%;" class="mx-auto rounded-circle d-block" alt="avatar">
         </div>
     </div>
 </div>
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#submitBtn').click(function(evt) {
+      var $self = $(this);
+      var brands = $('#skillsSelect option:selected');
+      var selected = [];
+      $(brands).each(function(index, brand){
+          selected.push($(this).val());
+      });
+      $.post('/profil', {
+        description: document.getElementById("description").value,
+        hobbies: document.getElementById("hobbies").value,
+        company: document.getElementById("company").value,
+        street: document.getElementById("street").value,
+        city: document.getElementById("city").value,
+        state: document.getElementById("state").value,
+        resume: document.getElementById("resume").value
+      },function(response) {
+        window.location.href="/profil/index";
+        console.log(selected)
+      });
+    });
+  });
+</script>
