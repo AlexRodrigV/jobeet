@@ -1,6 +1,6 @@
 <h1><%= @enterprise.name %></h1>
-<% @enterprise.recruiters.each do |recruiter| %>
-  <% recruiter.offers.each do |offer| %>
+<% @enterprise.users.each do |recruiter| %>
+  <% Offer.where(recruiter_id: recruiter.id).each do |offer| %>
     <p><a href="/enterprise/<%=offer.id%>"><%= offer.title %></a></p>
   <% end %>
 <% end %>

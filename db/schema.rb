@@ -14,26 +14,21 @@ ActiveRecord::Schema.define(version: 2019_09_29_131137) do
 
   create_table "applications", force: :cascade do |t|
     t.integer "offer_id"
-    t.integer "employee_id"
-  end
-
-  create_table "employees", force: :cascade do |t|
-    t.string "name"
-    t.string "keywords"
+    t.integer "user_id"
   end
 
   create_table "enterprises", force: :cascade do |t|
     t.string "name"
+    t.integer "user_id"
   end
 
   create_table "global_data", force: :cascade do |t|
     t.boolean "isConnected"
     t.string "Username"
     t.string "Email"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "recruiter_id"
-    t.integer "employee_id"
     t.integer "role"
     t.boolean "reset"
     t.string "image"
@@ -43,21 +38,16 @@ ActiveRecord::Schema.define(version: 2019_09_29_131137) do
     t.string "title"
     t.text "description"
     t.string "keywords"
+    t.integer "recruiter_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "recruiter_id"
-    t.index ["recruiter_id"], name: "index_offers_on_recruiter_id"
-  end
-
-  create_table "recruiters", force: :cascade do |t|
-    t.string "name"
-    t.integer "enterprise_id"
-    t.index ["enterprise_id"], name: "index_recruiters_on_enterprise_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
+    t.boolean "isRecruiter"
+    t.integer "enterprise_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "image"

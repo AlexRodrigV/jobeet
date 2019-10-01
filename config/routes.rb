@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'offers' => 'offers#home'
+  get 'offers/:id' => 'offers#show'
+  patch 'offers/:id' => 'offers#apply'
+
   get 'enterprise' => 'enterprise#index'
   post 'enterprise' => 'enterprise#create'
   get 'enterprise/:id' => 'enterprise#show'
@@ -17,7 +21,6 @@ Rails.application.routes.draw do
   post 'home/applicant' => 'home#applicant'
   post 'home/recruiter' => 'home#recruiter'
 
-  resources :offers
   resources :users
 
   root 'home#index'

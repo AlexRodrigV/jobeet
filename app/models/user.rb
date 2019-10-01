@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :applications
+  has_many :offers
   def self.from_omniauth(auth)
     @var = GlobalData.find(1)
     @var.update_columns('isConnected': true, 'Username': auth.info.name, 'Email': auth.info.email, 'image': auth.info.image)

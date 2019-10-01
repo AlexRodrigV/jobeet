@@ -1,3 +1,3 @@
 class Enterprise < ApplicationRecord
-  has_many :recruiters
+  has_many :users
 end

@@ -1,10 +1,14 @@
 <h1><%= @offer.title %></h1>
+
+<p>postulants:<p>
+  <%= @offer.applications.each do |application| %>
+    <p><%= User.find(application.user_id).name %><p>
+  <% end %>
+
 <%= form_tag "/enterprise/#{@offer.id}", method:"patch" do %>
-  <p>
-    <input type="text" name="title" value=<%= @offer.title %> />
-  </p>
-  <p><input type="text" name="description" value="<%= @offer.description %>" /></p>
-  <p><input type="text" name="keywords" value="<%= @offer.keywords %>" /></p>
+  <p>titre: <input type="text" name="title" value=<%= @offer.title %> /></p>
+  <p>description: <input type="text" name="description" value="<%= @offer.description %>" /></p>
+  <p>mots clés: <input type="text" name="keywords" value="<%= @offer.keywords %>" /></p>
   <p><input type="submit" value="Modifier l'offre" /></p>
 <% end %>
 

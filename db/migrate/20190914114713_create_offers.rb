@@ -5,6 +5,8 @@ class CreateOffers < ActiveRecord::Migration[6.0]
       t.text :description
       t.string :keywords
 
+      t.integer :recruiter_id
+
 
       t.timestamps
     end

@@ -8,7 +8,7 @@ class EnterpriseController < ApplicationController
 
   def create
     @test = params[:title]
-    @recruiterId = GlobalData.find(1).recruiter_id
+    @recruiterId = GlobalData.find(1).user_id
     @offer = Offer.create title:params[:title], recruiter_id: @recruiterId
     redirect_to "/enterprise"
   end
