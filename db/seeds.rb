@@ -12,3 +12,7 @@ GlobalData.create(isConnected: false, Username: 'toto', Email: '@', role: 1, res
 Enterprise.create name:'Google'
 User.create(name: "toto", email:"@", image: "", isRecruiter: true, enterprise_id:1)
 Offer.create title:"testOffer", recruiter_id:1
+skillsList = ["Android", "Angular", "C", "C#", "C++", "CakePHP", "Cassandra", "CSS", "Django", "Dovecot", "Drupal", "Excel", "Go", "GSuite", "HTML", "iOS", "Java", "JavaScript", "Joomla", "Libre", "MariaDB", "MongoDB", "MySQL", ".NET", "NGINX", "Node.js", "Objective-C", "Phonegap", "Photoshop", "PHP", "Postfix", "PostgreSQL", "Prestashop", "Python", "React.js", "Redis", "Ruby", "Swift", "Vue.js", "Webpack", "WordPress"]
+skillsList.each do |elt|
+    Skill.create(name: elt)
+end

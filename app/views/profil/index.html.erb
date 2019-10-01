@@ -9,9 +9,7 @@
 <script type="text/javascript">
     $(function () {
         $('#skillsSelect').multiselect({
-            includeSelectAllOption: true,
-            enableCaseInsensitiveFiltering: true,
-            enableFiltering: true,
+            includeSelectAllOption: true
         });
     });
 </script>
@@ -93,11 +91,10 @@
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Skills</label>
                             <div style="padding-left: 20px;">
-                              <select id="skillsSelect" class="selectpicker show-menu-arrow form-control" multiple>
-                                <option>chicken</option>
-                                <option>turkey</option>
-                                <option>duck</option>
-                                <option>goose</option>
+                              <select id="skillsSelect" class="selectpicker show-menu-arrow form-control" style="width:300px; height:300px;" multiple>
+                                <% @skills.each do |elt|%>
+                                  <option><%= elt.name %></option>
+                                <% end %>
                               </select>
                             </div>
                         </div>
