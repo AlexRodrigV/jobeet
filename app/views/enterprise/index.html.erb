@@ -1,3 +1,5 @@
+<%= render 'home/navbar' %>
+
 <h1><%= @enterprise.name %></h1>
 <% @enterprise.users.each do |recruiter| %>
   <% Offer.where(recruiter_id: recruiter.id).each do |offer| %>

@@ -1,3 +1,5 @@
+<%= render 'home/navbar' %>
+
 <% @offers.each do |offer| %>
   <p><a href="/offers/<%=offer.id%>"><%= offer.title %></a></p>
 <% end %>
