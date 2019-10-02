@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_01_130617) do
+ActiveRecord::Schema.define(version: 2019_10_02_093416) do
 
   create_table "applications", force: :cascade do |t|
     t.integer "offer_id"
     t.integer "user_id"
+    t.integer "percentage"
   end
 
   create_table "enterprises", force: :cascade do |t|
@@ -43,6 +44,16 @@ ActiveRecord::Schema.define(version: 2019_10_01_130617) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "skill_offers", force: :cascade do |t|
+    t.integer "skill_id"
+    t.integer "offer_id"
+  end
+
+  create_table "skill_users", force: :cascade do |t|
+    t.integer "skill_id"
+    t.integer "user_id"
+  end
+
   create_table "skills", force: :cascade do |t|
     t.string "name"
   end
@@ -52,16 +63,9 @@ ActiveRecord::Schema.define(version: 2019_10_01_130617) do
     t.string "email"
     t.boolean "isRecruiter"
     t.integer "enterprise_id"
-    t.string "image"
-    t.string "description"
-    t.string "hobbies"
-    t.string "company"
-    t.string "street"
-    t.string "city"
-    t.string "state"
-    t.string "resume"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "image"
   end
 
 end

@@ -2,7 +2,8 @@
 
 <p>postulants:<p>
   <%= @offer.applications.each do |application| %>
-    <p><%= User.find(application.user_id).name %><p>
+    <p><%= application.percentage %>%</p>
+    <p> : <%= User.find(application.user_id).name %><p>
   <% end %>
 
 <%= form_tag "/enterprise/#{@offer.id}", method:"patch" do %>
