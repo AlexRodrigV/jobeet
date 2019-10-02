@@ -9,7 +9,8 @@
 <script type="text/javascript">
     $(function () {
         $('#skillsSelect').multiselect({
-            includeSelectAllOption: true
+            includeSelectAllOption: true,
+            maxHeight: "400",
         });
     });
 </script>
@@ -91,7 +92,7 @@
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Skills</label>
                             <div style="padding-left: 20px;">
-                              <select id="skillsSelect" class="selectpicker show-menu-arrow form-control" style="width:300px; height:300px;" multiple>
+                              <select id="skillsSelect" class="selectpicker show-menu-arrow form-control" multiple>
                                 <% @skills.each do |elt|%>
                                   <option><%= elt.name %></option>
                                 <% end %>
@@ -141,6 +142,11 @@
     </div>
 </div>
 
+<style>
+  .dropdown-menu {
+    min-width: 200px;
+  }
+</style>
 
 <script type="text/javascript">
   $(document).ready(function() {
