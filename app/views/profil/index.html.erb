@@ -12,6 +12,10 @@
             includeSelectAllOption: true,
             maxHeight: "400",
         });
+        $('#removeSkillsSelect').multiselect({
+            includeSelectAllOption: true,
+            maxHeight: "400",
+        });
     });
 </script>
 
@@ -85,11 +89,21 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Skills</label>
+                            <label class="col-lg-3 col-form-label form-control-label">Selected skills</label>
                             <div style="padding-left: 20px;">
                               <select id="skillsSelect" class="selectpicker show-menu-arrow form-control" multiple>
-                                <% @skills.each do |elt|%>
-                                  <option><%= elt.name %></option>
+                                <% @availableSkills.each do |elt|%>
+                                  <option><%= elt %></option>
+                                <% end %>
+                              </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Skills to remove</label>
+                            <div style="padding-left: 20px;">
+                              <select id="removeSkillsSelect" class="selectpicker show-menu-arrow form-control" multiple>
+                                <% @notAvailableSkills.each do |elt|%>
+                                  <option><%= elt %></option>
                                 <% end %>
                               </select>
                             </div>
@@ -152,6 +166,11 @@
       $(brands).each(function(index, brand){
           selected.push($(this).val());
       });
+      var tab = $('#removeSkillsSelect option:selected');
+      var removeSelected = [];
+      $(tab).each(function(index, tmp){
+          removeSelected.push($(this).val());
+      });
       $.post('/profil', {
         description: document.getElementById("description").value,
         hobbies: document.getElementById("hobbies").value,
@@ -160,7 +179,8 @@
         city: document.getElementById("city").value,
         state: document.getElementById("state").value,
         resume: document.getElementById("resume").value,
-        skills: selected
+        skills: selected,
+        removeSkills: removeSelected
       },function(response) {
         window.location.href="/profil/index";
         console.log(selected)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_02_132922) do
+ActiveRecord::Schema.define(version: 2019_10_02_194057) do
 
   create_table "applications", force: :cascade do |t|
     t.integer "offer_id"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 2019_10_02_132922) do
 
   create_table "skills", force: :cascade do |t|
     t.string "name"
+    t.index ["name"], name: "index_Skills_on_name", unique: true
   end
 
   create_table "users", force: :cascade do |t|
