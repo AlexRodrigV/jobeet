@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   patch 'offers/:id' => 'offers#apply'
 
   get 'enterprise' => 'enterprise#index'
+  get 'enterprise/newOffer'
   post 'enterprise' => 'enterprise#create'
   get 'enterprise/:id' => 'enterprise#show'
   patch 'enterprise/:id' => 'enterprise#update'

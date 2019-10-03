@@ -2,16 +2,14 @@
 
 
 <h1><%= @offer.title %></h1>
-<p>description: <%= @offer.description %></p>
-
-<p>keywords: <%= @offer.keywords %></p>
-<p>skills: <%= SkillOffer.where(offer_id: @offer.id).each do |skillOffer| %>
-  <p><%= (Skill.find(skillOffer.skill_id)).name %><p>
+<h4>Description:</h4>
+<h6><%= @offer.description %></h6>
+<h4>Skills:</h4>
+<p><% SkillOffer.where(offer_id: @offer.id).each do |skillOffer| %>
+  <a href="#" class="badge badge-dark badge-pill"><%= (Skill.find(skillOffer.skill_id)).name %></a>
 <% end %>
 
 
 <%= form_tag "/offers/#{@offer.id}", method:"patch" do %>
   <p><input type="submit" value="Postuler" /></p>
 <% end %>
-
-<p> <a href="/enterprise"> Retourner à la liste des offres </a></p>

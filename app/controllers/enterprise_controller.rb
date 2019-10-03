@@ -6,15 +6,17 @@ class EnterpriseController < ApplicationController
     @enterprise = Enterprise.find(1)
   end
 
-  def create
-    @test = params[:title]
-    @recruiterId = GlobalData.find(1).user_id
-    @offer = Offer.create title:params[:title], recruiter_id: @recruiterId
-    redirect_to "/enterprise"
-  end
-
   def show
     @offer = Offer.find(params[:id])
+  end
+
+  def create
+    o = Offer.create title: params[:title], description: params[:description], recruiter_id:GlobalData.find(1).user_id
+    skills = params[:skills]
+    skills.each do |skill|
+      SkillOffer.create offer_id:o.id, skill_id:Skill.where(name:skill).first.id
+    end
+    redirect_to '/enterprise'
   end
 
   def update
