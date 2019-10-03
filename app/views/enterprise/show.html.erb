@@ -3,7 +3,7 @@
 <h1><%= @offer.title %></h1>
 
 <p>postulants:<p>
-  <%= @offer.applications.each do |application| %>
+  <% @offer.applications.each do |application| %>
     <p><%= application.percentage %>%</p>
     <p> : <%= User.find(application.user_id).name %><p>
   <% end %>

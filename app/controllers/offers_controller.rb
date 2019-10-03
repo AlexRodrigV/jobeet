@@ -11,7 +11,7 @@ class OffersController < ApplicationController
     offerId = params[:id]
     offer = Offer.find(offerId)
 
-    applicantId = GlobalData.find(1).user_id
+    applicantId = User.where(email: GlobalData.find(1).Email).first.id
     applicant = User.find(applicantId)
 
     applicantSkills = SkillUser.where(user_id: applicantId)
