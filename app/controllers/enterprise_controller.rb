@@ -31,9 +31,9 @@ class EnterpriseController < ApplicationController
   end
 
   def update
-    o = Offer.all.first
+    o = Offer.find(params[:id])
     o.update title: params[:title], description: params[:description]
     redirect_to "/enterprise"
   end
-  
+
 end

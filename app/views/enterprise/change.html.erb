@@ -14,7 +14,6 @@
 </script>
 
 <%= render 'home/navbar' %>
-<% @test = params[:id] %>
 
 <div class="col-lg-3">
   <input id="title" class="form-control" type="text" placeholder="Title">
@@ -37,16 +36,19 @@
 
 
 
+
 <script type="text/javascript">
   $(document).ready(function() {
     $('#submitBtn').click(function(evt) {
       var $self = $(this);
       var brands = $('#skillsSelect option:selected');
       var selected = [];
+      var id = <%= @test %>
       $(brands).each(function(index, brand){
           selected.push($(this).val());
       });
       $.post('/enterprise/update/', {
+        id: id,
         title: document.getElementById("title").value,
         description: document.getElementById("description").value,
         skills: selected
