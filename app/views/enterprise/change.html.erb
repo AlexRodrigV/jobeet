@@ -43,7 +43,7 @@
       var $self = $(this);
       var brands = $('#skillsSelect option:selected');
       var selected = [];
-      var id = <%= @test %>
+      var id = <%= params[:id] %>
       $(brands).each(function(index, brand){
           selected.push($(this).val());
       });
@@ -53,7 +53,7 @@
         description: document.getElementById("description").value,
         skills: selected
       },function(response) {
-        window.location.href="/enterprise/";
+        window.location.href="/enterprise/" + id;
       });
     });
   });
