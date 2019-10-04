@@ -8,7 +8,11 @@ Rails.application.routes.draw do
   get 'enterprise/newOffer'
   post 'enterprise' => 'enterprise#create'
   get 'enterprise/:id' => 'enterprise#show'
+  get 'enterprise/delete/:id' => 'enterprise#delete'
   patch 'enterprise/:id' => 'enterprise#update'
+  get 'enterprise/update/:id' => 'enterprise#change'
+  post 'enterprise/update' => 'enterprise#update'
+
 
   get 'profil/index'
 

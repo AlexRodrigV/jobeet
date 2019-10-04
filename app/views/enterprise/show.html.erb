@@ -8,9 +8,5 @@
     <p> : <%= User.find(application.user_id).name %><p>
   <% end %>
 
-<%= form_tag "/enterprise/#{@offer.id}", method:"patch" do %>
-  <p>titre: <input type="text" name="title" value=<%= @offer.title %> /></p>
-  <p>description: <input type="text" name="description" value="<%= @offer.description %>" /></p>
-  <p>mots clés: <input type="text" name="keywords" value="<%= @offer.keywords %>" /></p>
-  <p><input type="submit" value="Modifier l'offre" /></p>
-<% end %>
+<p><a href=<%= "/enterprise/delete/#{@offer.id}" %>>Delete offer</a></p>
+<p><a href=<%= "/enterprise/update/#{@offer.id}" %>>Update offer</a></p>

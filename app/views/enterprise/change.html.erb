@@ -1,0 +1,58 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+<link href="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/css/bootstrap-multiselect.css"
+    rel="stylesheet" type="text/css" />
+<script src="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/js/bootstrap-multiselect.js"
+    type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#skillsSelect').multiselect({
+            includeSelectAllOption: true,
+            maxHeight: "400",
+        });
+    });
+</script>
+
+<%= render 'home/navbar' %>
+<% @test = params[:id] %>
+
+<div class="col-lg-3">
+  <input id="title" class="form-control" type="text" placeholder="Title">
+  <input id="description" class="form-control" type="text" placeholder="Description">
+</div>
+
+<p><select id="skillsSelect" class="selectpicker show-menu-arrow form-control" multiple>
+  <% @skills.each do |elt|%>
+    <option><%= elt.name %></option>
+  <% end %>
+</select><p>
+
+<input id="submitBtn" type="button" class="btn btn-primary" value="Update offer">
+
+<style>
+  .dropdown-menu {
+    min-width: 200px;
+  }
+</style>
+
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#submitBtn').click(function(evt) {
+      var $self = $(this);
+      var brands = $('#skillsSelect option:selected');
+      var selected = [];
+      $(brands).each(function(index, brand){
+          selected.push($(this).val());
+      });
+      $.post('/enterprise/update/', {
+        title: document.getElementById("title").value,
+        description: document.getElementById("description").value,
+        skills: selected
+      },function(response) {
+        window.location.href="/enterprise/";
+      });
+    });
+  });
+</script>
