@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'offers' => 'offers#home'
   get 'offers/:id' => 'offers#show'
   patch 'offers/:id' => 'offers#apply'
+  post 'offers/:id' => 'offers#unsuscribe'
 
   get 'enterprise' => 'enterprise#index'
   get 'enterprise/newOffer'

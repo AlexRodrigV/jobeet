@@ -5,6 +5,8 @@ class OffersController < ApplicationController
 
   def show
     @offer = Offer.find(params[:id])
+    userId = User.where(email: GlobalData.find(1).Email).first.id
+    @haveApplied = Application.where(user_id: userId, offer_id: @offer.id).exists?
   end
 
   def apply
@@ -27,9 +29,21 @@ class OffersController < ApplicationController
         end
       end
     end
-    percentage = common * 100 / offerSkills.count
+
+    if (offerSkills.count == 0)
+      percentage = 100
+    else
+      percentage = common * 100 / offerSkills.count
+    end
 
     Application.create offer_id: offerId, user_id: applicantId, percentage: percentage
-    redirect_to "/offers/#{offerId}"
+    redirect_to "/offers/"
+  end
+
+  def unsuscribe
+    offerId = params[:id]
+    applicantId = User.where(email: GlobalData.find(1).Email).first.id
+    Application.where(user_id: applicantId, offer_id: offerId).first.destroy
+    redirect_to "/offers"
   end
 end

@@ -4,8 +4,8 @@
 
 <p>postulants:<p>
   <% @offer.applications.each do |application| %>
-    <p><%= application.percentage %>%</p>
-    <p> : <%= User.find(application.user_id).name %><p>
+    <%= application.percentage %>%
+    : <%= User.find(application.user_id).name %>
   <% end %>
 
 <p><a href=<%= "/enterprise/delete/#{@offer.id}" %>>Delete offer</a></p>

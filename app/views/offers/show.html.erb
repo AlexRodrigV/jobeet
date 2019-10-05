@@ -9,7 +9,12 @@
   <a href="#" class="badge badge-dark badge-pill"><%= (Skill.find(skillOffer.skill_id)).name %></a>
 <% end %>
 
-
-<%= form_tag "/offers/#{@offer.id}", method:"patch" do %>
-  <p><input type="submit" value="Postuler" /></p>
+<% if (@haveApplied) %>
+  <%= form_tag "/offers/#{@offer.id}", method:"post" do %>
+    <p><input type="submit" value="Unsuscribe" /></p>
+  <% end %>
+<% else %>
+  <%= form_tag "/offers/#{@offer.id}", method:"patch" do %>
+    <p><input type="submit" value="Apply" /></p>
+  <% end %>
 <% end %>
