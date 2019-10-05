@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 2019_10_02_194057) do
     t.string "title"
     t.text "description"
     t.string "keywords"
+    t.integer "nbModifications", default: 0
     t.integer "recruiter_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

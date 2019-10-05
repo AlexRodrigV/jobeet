@@ -13,7 +13,7 @@ class EnterpriseController < ApplicationController
   def create
     o = Offer.create title: params[:title], description: params[:description], recruiter_id:GlobalData.find(1).user_id
     skills = params[:skills]
-    if (skills.length != 0)
+    if (skills)
       skills.each do |skill|
         SkillOffer.create offer_id:o.id, skill_id:Skill.where(name:skill).first.id
       end
@@ -32,7 +32,15 @@ class EnterpriseController < ApplicationController
 
   def update
     o = Offer.find(params[:id])
+    o.update nbModifications:o.nbModifications+1
     o.update title: params[:title], description: params[:description]
+
+    skills = params[:skills]
+    if (skills)
+      skills.each do |skill|
+        SkillOffer.create offer_id:o.id, skill_id:Skill.where(name:skill).first.id
+      end
+    end
     redirect_to "/enterprise/#{params[:id]}"
   end
 

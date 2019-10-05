@@ -9,4 +9,9 @@
   <% end %>
 
 <p><a href=<%= "/enterprise/delete/#{@offer.id}" %>>Delete offer</a></p>
-<p><a href=<%= "/enterprise/update/#{@offer.id}" %>>Update offer</a></p>
+
+<% if (@offer.nbModifications < 2) %>
+  <p><a href=<%= "/enterprise/update/#{@offer.id}" %>>Update offer</a></p>
+<% else %>
+  <p>Can't update anymore<p>
+<% end %>
