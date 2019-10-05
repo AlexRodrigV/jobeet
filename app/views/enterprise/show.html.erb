@@ -3,10 +3,18 @@
 <h1><%= @offer.title %></h1>
 
 <p>postulants:<p>
-  <% @offer.applications.each do |application| %>
-    <%= application.percentage %>%
-    : <%= User.find(application.user_id).name %>
-  <% end %>
+<% @offer.applications.each do |application| %>
+  <%= application.percentage %>%
+  : <%= User.find(application.user_id).name %>
+<% end %>
+
+<p>suggestions:<p>
+<p><% for i in 0...@maxPrinted %><p>
+  <%= @percentages[i] %>
+  : <%= @suggestions[i].name %>
+<% end %>
+
+
 
 <p><a href=<%= "/enterprise/delete/#{@offer.id}" %>>Delete offer</a></p>
 
