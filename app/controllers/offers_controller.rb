@@ -51,4 +51,3 @@ class OffersController < ApplicationController
     redirect_to "/offers"
   end
 end
-end

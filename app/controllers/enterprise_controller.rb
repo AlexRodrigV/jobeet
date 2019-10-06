@@ -31,7 +31,7 @@ class EnterpriseController < ApplicationController
   def show
     @offer = Offer.find(params[:id])
     users = User.all
-    @maxPrinted = [10, users.length].min
+    @maxPrinted = [10, users.length - Application.where(offer_id: @offer.id).length].min
     @percentages = Array.new(@maxPrinted, 0)
     @suggestions = Array.new(@maxPrinted, nil)
     users.each do |user|
