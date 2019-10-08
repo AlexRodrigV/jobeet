@@ -28,6 +28,18 @@ class EnterpriseController < ApplicationController
     @enterprise = Enterprise.find(1)
   end
 
+  def create
+    o = Offer.create title: params[:title], description: params[:description], recruiter_id:GlobalData.find(1).user_id
+    skills = params[:skills]
+    if (skills)
+      skills.each do |skill|
+        SkillOffer.create offer_id:o.id, skill_id:Skill.where(name:skill).first.id
+      end
+    end
+    redirect_to '/enterprise'
+  end
+
+
   def show
     @offer = Offer.find(params[:id])
     users = User.all
@@ -58,17 +70,6 @@ class EnterpriseController < ApplicationController
         end
       end
     @applications = Application.all.order(:percentage)
-  end
-
-  def create
-    o = Offer.create title: params[:title], description: params[:description], recruiter_id:GlobalData.find(1).user_id
-    skills = params[:skills]
-    if (skills)
-      skills.each do |skill|
-        SkillOffer.create offer_id:o.id, skill_id:Skill.where(name:skill).first.id
-      end
-    end
-    redirect_to '/enterprise'
   end
 
   def delete
