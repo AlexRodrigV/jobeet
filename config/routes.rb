@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get 'profil/index'
 
   get 'home/index'
+  get 'chat/index', to: 'chat#index'
   get 'sessions/index'
   # Routes for Google authentication
   get 'auth/:provider/callback', to: 'sessions#googleAuth'
@@ -32,6 +33,7 @@ Rails.application.routes.draw do
   resources :offers
   resources :annuaire
   resources :users
+  resources :chat, only: %i[index]
 
   root 'home#index'
 

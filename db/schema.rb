@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_02_194057) do
+ActiveRecord::Schema.define(version: 2019_10_08_150449) do
 
   create_table "applications", force: :cascade do |t|
     t.integer "offer_id"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2019_10_02_194057) do
     t.integer "recruiter_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "identifier"
   end
 
   create_table "skill_offers", force: :cascade do |t|

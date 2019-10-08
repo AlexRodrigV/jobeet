@@ -10,6 +10,10 @@ class User < ApplicationRecord
       user.name = auth.info.name
       user.email = auth.info.email
       user.image = auth.info.image
+      new_user = CometChatService.new(
+        uid: auth.info.email.gsub!(/[@.-_]/, '@' => "at", '.' => '', '-' => '', '_' => ''),
+        name: auth.info.name
+      ).create_user
     end
   end
 end

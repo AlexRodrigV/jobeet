@@ -61,7 +61,11 @@ class EnterpriseController < ApplicationController
   end
 
   def create
-    o = Offer.create title: params[:title], description: params[:description], recruiter_id:GlobalData.find(1).user_id
+    o = Offer.create title: params[:title], description: params[:description], recruiter_id: GlobalData.find(1).user_id, identifier: (params[:title] + ((User.where("email= ?", @var.Email).first).id).to_s).gsub!(/[@.-_]/, '@' => "at", '.' => '', '-' => '', '_' => '')
+    CometChatService.new(
+      uid: o.identifier,
+      name: o.title
+    ).create_user
     skills = params[:skills]
     if (skills)
       skills.each do |skill|
