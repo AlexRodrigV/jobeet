@@ -21,5 +21,4 @@ Offer.create title:"testOffer", recruiter_id:1
 SkillOffer.create offer_id:1, skill_id:1
 SkillOffer.create offer_id:1, skill_id:2
 SkillOffer.create offer_id:1, skill_id:3
-
 SkillUser.create user_id:1, skill_id:1
