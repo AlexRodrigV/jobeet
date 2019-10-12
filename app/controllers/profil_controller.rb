@@ -29,6 +29,15 @@ class ProfilController < ApplicationController
         SkillUser.where(user_id: @currentUser.id, skill_id: idToRemove).first.delete
       end
     end
-    User.where("email= ?", @var.Email).first.update_columns('description': params[:description], 'hobbies': params[:hobbies], 'company': params[:company], 'street': params[:street], 'city': params[:city], 'state': params[:state], 'resume': params[:resume])
+
+
+    if params[:off]
+      situation = 0
+    elsif params[:onsoft]
+      situation = 1
+    else
+      situation = 2
+    end
+    User.where("email= ?", @var.Email).first.update_columns('description': params[:description], 'hobbies': params[:hobbies], 'company': params[:company], 'street': params[:street], 'city': params[:city], 'state': params[:state], 'resume': params[:resume], 'isPremium': params[:isPremium], 'situation': situation)
   end
 end

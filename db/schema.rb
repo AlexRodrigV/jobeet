@@ -65,6 +65,8 @@ ActiveRecord::Schema.define(version: 2019_10_08_150449) do
     t.string "name"
     t.string "email"
     t.boolean "isRecruiter"
+    t.boolean "isPremium", default: false
+    t.integer "situation", default: 2
     t.integer "enterprise_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

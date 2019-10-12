@@ -1,7 +1,11 @@
 <%= render 'home/navbar' %>
 
 
-<h1><%= @offer.title %></h1>
+<h1><%= @offer.title %>
+<% if @user.isPremium %>
+  : <%= @percentage %>%</h1>
+<% end %>
+
 <h4>Description:</h4>
 <h6><%= @offer.description %></h6>
 <h4>Skills:</h4>

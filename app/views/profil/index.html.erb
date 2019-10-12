@@ -67,6 +67,22 @@
                         <div class="col-md-12">
                             <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span><strong>Resume</strong></h5>
                             <%= @currentUser.resume %>
+                            <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span><strong>Premium</strong></h5>
+                            <% if @currentUser.isPremium %>
+                              <p>Yes</p>
+                            <% else %>
+                              <p>No</p>
+                            <% end %>
+                            <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span><strong>Situation</strong></h5>
+                            <% case @currentUser.situation %>
+                            <% when 0 %>
+                              <p>OFF</p>
+                            <% when 1 %>
+                              <p>ON-SOFT</p>
+                            <% when 2 %>
+                              <p>ON-HARD</p>
+                            <% end %>
+
                         </div>
                     </div>
                     <!--/row-->
@@ -136,6 +152,45 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Situation</label>
+                            <div class="col-lg-9">
+                              <div class="form-check">
+                                <% case @currentUser.situation %>
+                                  <% when 0 %>
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="off" value="option1" checked>
+                                    <p><label class="form-check-label" for="exampleRadios1">OFF</label></p>
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="on-soft" value="option2">
+                                    <p><label class="form-check-label" for="exampleRadios2"> ON-SOFT </label></p>
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="on-hard" value="option3">
+                                    <p><label class="form-check-label" for="exampleRadios3"> ON-HARD </label><p>
+                                  <% when 1 %>
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="off" value="option1">
+                                    <p><label class="form-check-label" for="exampleRadios1">OFF</label></p>
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="on-soft" value="option2" checked
+                                    <p><label class="form-check-label" for="exampleRadios2"> ON-SOFT </label></p>
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="on-hard" value="option3">
+                                    <p><label class="form-check-label" for="exampleRadios3"> ON-HARD </label><p>
+                                  <% when 2 %>
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="off" value="option1">
+                                    <p><label class="form-check-label" for="exampleRadios1">OFF</label></p>
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="on-soft" value="option2">
+                                    <p><label class="form-check-label" for="exampleRadios2"> ON-SOFT </label></p>
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="on-hard" value="option3" checked>
+                                    <p><label class="form-check-label" for="exampleRadios3"> ON-HARD </label><p>
+                                <% end %>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                          <% if @currentUser.isPremium %>
+                            <input class="form-check-input" type="checkbox" id="isPremium" checked>
+                          <% else %>
+                            <input class="form-check-input" type="checkbox" id="isPremium" >
+                          <% end %>
+                          <label class="form-check-label" for="Premium">Premium</label>
+                        </div>
+
+                        <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label"></label>
                             <div class="col-lg-9">
                                 <input id="submitBtn" type="button" class="btn btn-primary" value="Save Changes">
@@ -156,6 +211,10 @@
     min-width: 200px;
   }
 </style>
+
+
+
+
 
 <script type="text/javascript">
   $(document).ready(function() {
@@ -179,6 +238,10 @@
         city: document.getElementById("city").value,
         state: document.getElementById("state").value,
         resume: document.getElementById("resume").value,
+        isPremium: $('#isPremium:checked').val(),
+        off: $('#off:checked').val(),
+        onsoft: $('#on-soft:checked').val(),
+        onhard: $('#on-hard:checked').val(),
         skills: selected,
         removeSkills: removeSelected
       },function(response) {

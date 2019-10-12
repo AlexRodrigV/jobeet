@@ -1,5 +1,11 @@
 <%= render 'home/navbar' %>
 
-<% @offers.each do |offer| %>
-  <p><a href="/offers/<%=offer.id%>"><%= offer.title %></a></p>
+<% if @user.isPremium %>
+  <% for i in (0..@offers.size-1) %>
+    <p><a href="/offers/<%= @offers[i].id%>"><%= @offers[i].title %>: <%= @percentages[i] %>%</a></p>
+  <% end %>
+<% else %>
+  <% @offers.each do |offer| %>
+    <p><a href="/offers/<%=offer.id%>"><%= offer.title %></a></p>
+    <% end %>
 <% end %>
