@@ -3,8 +3,8 @@
 
 <h1>All users</h1>
 
-<% @users.each do |user| %>
+<% @users.where(isRecruiter: false).each do |user| %>
   <li>
-    <%= link_to user.name, user %>
+    <p><a href=<%= "/profil/#{user.id}" %>><%= user.name %></a></p>
   </li>
 <% end %>
