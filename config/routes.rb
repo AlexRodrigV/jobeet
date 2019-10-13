@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   post 'enterprise/update' => 'enterprise#update'
 
 
-  get 'profil/index'
+  get 'profil/:id' => 'profil#index'
 
   get 'home/index'
   get 'chat/index', to: 'chat#index'

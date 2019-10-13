@@ -11,6 +11,7 @@
 <p>suggestions:<p>
 <p><% for i in 0...@maxPrinted %><p>
   <%= @percentages[i] %>%
+  <p><a href=<%= "/profil/#{@suggestions[i].id}" %>><%= @suggestions[i].name %></a></p>
   : <%= @suggestions[i].name %>
 <% end %>
 

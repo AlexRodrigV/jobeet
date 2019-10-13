@@ -1,6 +1,6 @@
 class ProfilController < ApplicationController
   def index
-    @currentUser = User.where("email= ?", @var.Email).first
+    @currentUser = User.find(params[:id])
     @notAvailableSkills = []
     SkillUser.where(user_id: @currentUser.id).each do |elt|
       @notAvailableSkills.push(Skill.find(elt.skill_id).name)
