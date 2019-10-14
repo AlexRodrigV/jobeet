@@ -10,12 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_08_150449) do
+ActiveRecord::Schema.define(version: 2019_10_14_173412) do
 
   create_table "applications", force: :cascade do |t|
     t.integer "offer_id"
     t.integer "user_id"
     t.integer "percentage"
+    t.string "idchatuser"
+    t.string "idchatoffer"
+    t.boolean "isAccepted"
   end
 
   create_table "enterprises", force: :cascade do |t|

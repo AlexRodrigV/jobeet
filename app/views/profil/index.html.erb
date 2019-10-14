@@ -84,7 +84,6 @@ type="text/javascript"></script>
               <% when 2 %>
               <p>ON-HARD</p>
               <% end %>
-
             </div>
           </div>
           <!--/row-->
@@ -249,7 +248,7 @@ type="text/javascript"></script>
               skills: selected,
               removeSkills: removeSelected
             },function(response) {
-              window.location.href="/profil/index";
+              window.location.href=<%= "/profil/#{@currentUserId}" %>;
               console.log(selected)
             });
           });

@@ -16,15 +16,13 @@ class OffersController < ApplicationController
     userId = @user.id
     @haveApplied = Application.where(user_id: userId, offer_id: @offer.id).exists?
     @percentage = getPercentage(params[:id], userId)
-
-
   end
 
   def apply
     offerId = params[:id]
     applicantId = User.where(email: GlobalData.find(1).Email).first.id
-
-    Application.create offer_id: offerId, user_id: applicantId, percentage: getPercentage(offerId, applicantId)
+    tmp = User.where(email: GlobalData.find(1).Email).first.email.gsub!(/[@.-_]/, '@' => "at", '.' => '', '-' => '', '_' => '')
+    Application.create offer_id: offerId, user_id: applicantId, percentage: getPercentage(offerId, applicantId), idchatuser: tmp, idchatoffer: Offer.find(params[:id]).identifier, isAccepted: false
     redirect_to "/offers/"
   end
 

@@ -29,7 +29,11 @@ class EnterpriseController < ApplicationController
   end
 
   def create
-    o = Offer.create title: params[:title], description: params[:description], recruiter_id:GlobalData.find(1).user_id
+    o = Offer.create title: params[:title], description: params[:description], recruiter_id:GlobalData.find(1).user_id, identifier: params[:title] + ((User.where("email= ?", @var.Email).first).id).to_s
+    CometChatService.new(
+      uid: params[:title] + ((User.where("email= ?", @var.Email).first).id).to_s,
+      name: o.title
+    ).create_user
     skills = params[:skills]
     if (skills)
       skills.each do |skill|
@@ -70,21 +74,6 @@ class EnterpriseController < ApplicationController
         end
       end
     @applications = Application.all.order(:percentage)
-  end
-
-  def create
-    o = Offer.create title: params[:title], description: params[:description], recruiter_id: GlobalData.find(1).user_id, identifier: (params[:title] + ((User.where("email= ?", @var.Email).first).id).to_s).gsub!(/[@.-_]/, '@' => "at", '.' => '', '-' => '', '_' => '')
-    CometChatService.new(
-      uid: o.identifier,
-      name: o.title
-    ).create_user
-    skills = params[:skills]
-    if (skills)
-      skills.each do |skill|
-        SkillOffer.create offer_id:o.id, skill_id:Skill.where(name:skill).first.id
-      end
-    end
-    redirect_to '/enterprise'
   end
 
   def delete
