@@ -1,11 +1,34 @@
 <%= render 'home/navbar' %>
 
-<% if @user.isPremium %>
-  <% for i in (0..@offers.size-1) %>
-    <p><a href="/offers/<%= @offers[i].id%>"><%= @offers[i].title %>: <%= @percentages[i] %>%</a></p>
-  <% end %>
-<% else %>
-  <% @offers.each do |offer| %>
-    <p><a href="/offers/<%=offer.id%>"><%= offer.title %></a></p>
+<h1 style="text-align: center; padding-top: 30px; padding-bottom: 30px;"><b><u>Offers</u></b></h1>
+<table class="table">
+  <thead>
+    <tr bgcolor="#D3D3D3" style="text-align: center;">
+      <th scope="col">Enterprise</th>
+      <th scope="col">Offer</th>
+      <th scope="col">Percentage of match</th>
+      <th scope="col">Detail</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @user.isPremium %>
+      <% for i in (0..@offers.size-1) %>
+        <tr style="text-align: center;">
+          <td><%= Enterprise.find(User.find(@offers[i].recruiter_id).enterprise_id).name %></td>
+          <td><%= @offers[i].title %></td>
+          <td><%= @percentages[i] %></td>
+          <td><a href="/offers/<%= @offers[i].id %>"><button type="button" class="btn btn-success">See the offer</button></a></td>
+        </tr>
+      <% end %>
+    <% else %>
+      <% @offers.each do |offer| %>
+          <tr style="text-align: center;">
+            <td><%= Enterprise.find(User.find(offer.recruiter_id).enterprise_id).name %></td>
+            <td><%= offer.title %></td>
+            <td>Be premium for that !</td>
+            <td><button type="button" class="btn btn-success"><a href="/offers/<%= offers.id %>">See the offer</a></button></td>
+          </tr>
+        <% end %>
     <% end %>
-<% end %>
+  </tbody>
+</table>
