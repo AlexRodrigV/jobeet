@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_many :applications
   has_many :offers
   has_many :skillUsers
+  has_many :skills, :through => :skillUsers
   def self.from_omniauth(auth)
     @var = GlobalData.find(1)
     @var.update_columns('isConnected': true, 'Username': auth.info.name, 'Email': auth.info.email, 'image': auth.info.image)
@@ -11,6 +12,7 @@ class User < ApplicationRecord
       user.name = auth.info.name
       user.email = auth.info.email
       user.image = auth.info.image
+      user.isRecruiter = @var.role == 2
       new_user = CometChatService.new(
         uid: tmp.gsub!(/[@.-_]/, '@' => "at", '.' => '', '-' => '', '_' => ''),
         name: auth.info.name

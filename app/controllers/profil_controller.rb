@@ -20,27 +20,45 @@ class ProfilController < ApplicationController
   def edit
     @currentUser = User.where("email= ?", @var.Email).first
     userId = @currentUser.id
-    if(params[:skills])
-      params[:skills].each do |skill|
-        skillId = Skill.where(name: skill).first.id
-        SkillUser.create user_id:userId, skill_id:skillId
-      end
-    end
-    if(params[:removeSkills])
-      params[:removeSkills].each do |elt|
-        idToRemove = Skill.where(name: elt).first.id
-        SkillUser.where(user_id: @currentUser.id, skill_id: idToRemove).first.delete
-      end
-    end
 
+    nameEnterprise = params[:enterprise]
+    if nameEnterprise
+      if @currentUser.enterprise_id == nil or nameEnterprise != Enterprise.find(@currentUser.enterprise_id).name
+      Offer.where(recruiter_id: @currentUser.id).each do |offer|
 
-    if params[:off]
-      situation = 0
-    elsif params[:onsoft]
-      situation = 1
+          Application.where(offer_id:  offer.id).each do |application|
+            application.delete
+          end
+          offer.delete
+        end
+        if !Enterprise.where(name: nameEnterprise).exists?
+          Enterprise.create name:nameEnterprise
+        end
+      end
+      User.where("email= ?", @var.Email).first.update_columns('description': params[:description], 'enterprise_id':Enterprise.where(name: nameEnterprise).first.id)
     else
-      situation = 2
+      if(params[:skills])
+        params[:skills].each do |skill|
+          skillId = Skill.where(name: skill).first.id
+          SkillUser.create user_id:userId, skill_id:skillId
+        end
+      end
+      if(params[:removeSkills])
+        params[:removeSkills].each do |elt|
+          idToRemove = Skill.where(name: elt).first.id
+          SkillUser.where(user_id: @currentUser.id, skill_id: idToRemove).first.delete
+        end
+      end
+
+
+      if params[:off]
+        situation = 0
+      elsif params[:onsoft]
+        situation = 1
+      else
+        situation = 2
+      end
+      User.where("email= ?", @var.Email).first.update_columns('description': params[:description], 'hobbies': params[:hobbies], 'company': params[:company], 'street': params[:street], 'city': params[:city], 'state': params[:state], 'resume': params[:resume], 'isPremium': params[:isPremium], 'situation': situation)
     end
-    User.where("email= ?", @var.Email).first.update_columns('description': params[:description], 'hobbies': params[:hobbies], 'company': params[:company], 'street': params[:street], 'city': params[:city], 'state': params[:state], 'resume': params[:resume], 'isPremium': params[:isPremium], 'situation': situation)
   end
 end

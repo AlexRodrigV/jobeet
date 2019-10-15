@@ -30,9 +30,6 @@ type="text/javascript"></script>
         </li>
         <% if @currentUser.email == GlobalData.find(1).Email %>
           <li class="nav-item">
-            <a href="" data-target="#messages" data-toggle="tab" class="nav-link">Messages</a>
-          </li>
-          <li class="nav-item">
             <a href="" data-target="#edit" data-toggle="tab" class="nav-link">Edit</a>
           </li>
         <% end %>
@@ -46,160 +43,184 @@ type="text/javascript"></script>
               <p>
                 <%= @currentUser.description %>
               </p>
-              <h5><strong>Hobbies</strong></h5>
-              <p>
-                <%= @currentUser.hobbies %>
-              </p>
-              <h5><strong>Company</strong></h5>
-              <p>
-                <%= @currentUser.company %>
-              </p>
-              <h5><strong>Address</strong></h5>
-              <p>
-                <%= @currentUser.street %>, <%= @currentUser.city %>, <%= @currentUser.state %>
-              </p>
-            </div>
-            <div class="col-md-6">
-              <h6>Skills</h6>
-              <% SkillUser.where(user_id: @currentUser.id).each do |skillUser| %>
-              <a href="#" class="badge badge-dark badge-pill"><%= Skill.find(skillUser.skill_id).name %></a>
-              <% end %>
-              <hr>
-            </div>
-            <div class="col-md-12">
-              <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span><strong>Resume</strong></h5>
-              <%= @currentUser.resume %>
-              <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span><strong>Premium</strong></h5>
-              <% if @currentUser.isPremium %>
-              <p>Yes</p>
+              <% if @currentUser.isRecruiter %>
+                <h5><strong>Enterprise</strong></h5>
+                <p>
+                  <% if @currentUser.enterprise_id == nil %>
+                     "No enterprise"
+                  <% else %>
+                    <%= Enterprise.find(@currentUser.enterprise_id).name %>
+                  <% end %>
+                </p>
               <% else %>
-              <p>No</p>
-              <% end %>
-              <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span><strong>Situation</strong></h5>
-              <% case @currentUser.situation %>
-              <% when 0 %>
-              <p>OFF</p>
-              <% when 1 %>
-              <p>ON-SOFT</p>
-              <% when 2 %>
-              <p>ON-HARD</p>
+                <h5><strong>Company</strong></h5>
+                <p>
+                  <%= @currentUser.company %>
+                </p>
+                <h5><strong>Hobbies</strong></h5>
+                <p>
+                  <%= @currentUser.hobbies %>
+                </p>
+                <h5><strong>Address</strong></h5>
+                <p>
+                  <%= @currentUser.street %>, <%= @currentUser.city %>, <%= @currentUser.state %>
+                </p>
               <% end %>
             </div>
+            <% if !@currentUser.isRecruiter %>
+              <div class="col-md-6">
+                <h6>Skills</h6>
+                <% SkillUser.where(user_id: @currentUser.id).each do |skillUser| %>
+                <a href="#" class="badge badge-dark badge-pill"><%= Skill.find(skillUser.skill_id).name %></a>
+                <% end %>
+                <hr>
+              </div>
+              <div class="col-md-12">
+                <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span><strong>Resume</strong></h5>
+                <%= @currentUser.resume %>
+                <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span><strong>Premium</strong></h5>
+                <% if @currentUser.isPremium %>
+                <p>Yes</p>
+                <% else %>
+                <p>No</p>
+                <% end %>
+                <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span><strong>Situation</strong></h5>
+                <% case @currentUser.situation %>
+                <% when 0 %>
+                <p>OFF</p>
+                <% when 1 %>
+                <p>ON-SOFT</p>
+                <% when 2 %>
+                <p>ON-HARD</p>
+                <% end %>
+              </div>
+            <% end %>
           </div>
           <!--/row-->
         </div>
         <% if @currentUser.email == GlobalData.find(1).Email %>
-        <div class="tab-pane" id="messages">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </div>
-        <div class="tab-pane" id="edit">
-          <form role="form">
-            <div class="form-group row">
-              <label class="col-lg-3 col-form-label form-control-label">Description</label>
-              <div class="col-lg-9">
-                <input id="description" class="form-control" type="text" value="<%= @currentUser.description %>">
+          <div class="tab-pane" id="edit">
+            <form role="form">
+              <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label">Description</label>
+                <div class="col-lg-9">
+                  <input id="description" class="form-control" type="text" value="<%= @currentUser.description %>">
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-lg-3 col-form-label form-control-label">Hobbies</label>
-              <div class="col-lg-9">
-                <input id="hobbies" class="form-control" type="text" value="<%= @currentUser.hobbies %>">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-lg-3 col-form-label form-control-label">Selected skills</label>
-              <div style="padding-left: 20px;">
-                <select id="skillsSelect" class="selectpicker show-menu-arrow form-control" multiple>
-                  <% @availableSkills.each do |elt|%>
-                  <option><%= elt %></option>
+              <% if @currentUser.isRecruiter %>
+              <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label">Enterprise</label>
+                <div class="col-lg-9">
+                  <% if @currentUser.enterprise_id == nil %>
+                    <input id="enterprise" class="form-control" type="text" value="">
+                  <% else %>
+                    <input id="enterprise" class="form-control" type="text" value="<%= Enterprise.find(@currentUser.enterprise_id).name %>">
                   <% end %>
-                </select>
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-lg-3 col-form-label form-control-label">Skills to remove</label>
-              <div style="padding-left: 20px;">
-                <select id="removeSkillsSelect" class="selectpicker show-menu-arrow form-control" multiple>
-                  <% @notAvailableSkills.each do |elt|%>
-                  <option><%= elt %></option>
-                  <% end %>
-                </select>
+              <% else %>
+              <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label">Company</label>
+                <div class="col-lg-9">
+                  <input id="company" class="form-control" type="text" value="<%= @currentUser.company %>">
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-lg-3 col-form-label form-control-label">Company</label>
-              <div class="col-lg-9">
-                <input id="company" class="form-control" type="text" value="<%= @currentUser.company %>">
+              <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label">Hobbies</label>
+                <div class="col-lg-9">
+                  <input id="hobbies" class="form-control" type="text" value="<%= @currentUser.hobbies %>">
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-lg-3 col-form-label form-control-label">Address</label>
-              <div class="col-lg-9">
-                <input id="street" class="form-control" type="text" placeholder="Street" value="<%= @currentUser.street %>">
+              <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label">Selected skills</label>
+                <div style="padding-left: 20px;">
+                  <select id="skillsSelect" class="selectpicker show-menu-arrow form-control" multiple>
+                    <% @availableSkills.each do |elt|%>
+                    <option><%= elt %></option>
+                    <% end %>
+                  </select>
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-lg-3 col-form-label form-control-label"></label>
-              <div class="col-lg-6">
-                <input id="city" class="form-control" type="text" placeholder="City" value="<%= @currentUser.city %>">
+              <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label">Skills to remove</label>
+                <div style="padding-left: 20px;">
+                  <select id="removeSkillsSelect" class="selectpicker show-menu-arrow form-control" multiple>
+                    <% @notAvailableSkills.each do |elt|%>
+                    <option><%= elt %></option>
+                    <% end %>
+                  </select>
+                </div>
               </div>
-              <div class="col-lg-3">
-                <input id="state" class="form-control" type="text" placeholder="State" value="<%= @currentUser.state %>">
+              <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label">Address</label>
+                <div class="col-lg-9">
+                  <input id="street" class="form-control" type="text" placeholder="Street" value="<%= @currentUser.street %>">
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-lg-3 col-form-label form-control-label">Resume</label>
-              <div class="col-lg-9">
-                <textarea rows="8" cols="80" id="resume" class="form-control" type="text"><%= @currentUser.resume %></textarea>
+              <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label"></label>
+                <div class="col-lg-6">
+                  <input id="city" class="form-control" type="text" placeholder="City" value="<%= @currentUser.city %>">
+                </div>
+                <div class="col-lg-3">
+                  <input id="state" class="form-control" type="text" placeholder="State" value="<%= @currentUser.state %>">
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-lg-3 col-form-label form-control-label">Situation</label>
-              <div class="col-lg-9">
-                <div class="form-check">
-                  <% case @currentUser.situation %>
-                  <% when 0 %>
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="off" value="option1" checked>
-                  <p><label class="form-check-label" for="exampleRadios1">OFF</label></p>
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="on-soft" value="option2">
-                  <p><label class="form-check-label" for="exampleRadios2"> ON-SOFT </label></p>
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="on-hard" value="option3">
-                  <p><label class="form-check-label" for="exampleRadios3"> ON-HARD </label><p>
-                    <% when 1 %>
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="off" value="option1">
+              <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label">Resume</label>
+                <div class="col-lg-9">
+                  <textarea rows="8" cols="80" id="resume" class="form-control" type="text"><%= @currentUser.resume %></textarea>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label">Situation</label>
+                <div class="col-lg-9">
+                  <div class="form-check">
+                    <% case @currentUser.situation %>
+                    <% when 0 %>
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="off" value="option1" checked>
                     <p><label class="form-check-label" for="exampleRadios1">OFF</label></p>
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="on-soft" value="option2" checked
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="on-soft" value="option2">
                     <p><label class="form-check-label" for="exampleRadios2"> ON-SOFT </label></p>
                     <input class="form-check-input" type="radio" name="exampleRadios" id="on-hard" value="option3">
                     <p><label class="form-check-label" for="exampleRadios3"> ON-HARD </label><p>
-                      <% when 2 %>
+                      <% when 1 %>
                       <input class="form-check-input" type="radio" name="exampleRadios" id="off" value="option1">
                       <p><label class="form-check-label" for="exampleRadios1">OFF</label></p>
-                      <input class="form-check-input" type="radio" name="exampleRadios" id="on-soft" value="option2">
+                      <input class="form-check-input" type="radio" name="exampleRadios" id="on-soft" value="option2" checked
                       <p><label class="form-check-label" for="exampleRadios2"> ON-SOFT </label></p>
-                      <input class="form-check-input" type="radio" name="exampleRadios" id="on-hard" value="option3" checked>
+                      <input class="form-check-input" type="radio" name="exampleRadios" id="on-hard" value="option3">
                       <p><label class="form-check-label" for="exampleRadios3"> ON-HARD </label><p>
-                        <% end %>
+                        <% when 2 %>
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="off" value="option1">
+                        <p><label class="form-check-label" for="exampleRadios1">OFF</label></p>
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="on-soft" value="option2">
+                        <p><label class="form-check-label" for="exampleRadios2"> ON-SOFT </label></p>
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="on-hard" value="option3" checked>
+                        <p><label class="form-check-label" for="exampleRadios3"> ON-HARD </label><p>
+                          <% end %>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="form-group row">
-                    <% if @currentUser.isPremium %>
-                    <input class="form-check-input" type="checkbox" id="isPremium" checked>
-                    <% else %>
-                    <input class="form-check-input" type="checkbox" id="isPremium" >
-                    <% end %>
-                    <label class="form-check-label" for="Premium">Premium</label>
-                  </div>
-
-                  <div class="form-group row">
-                    <label class="col-lg-3 col-form-label form-control-label"></label>
-                    <div class="col-lg-9">
-                      <input id="submitBtn" type="button" class="btn btn-primary" value="Save Changes">
+                    <div class="form-group row">
+                      <% if @currentUser.isPremium %>
+                      <input class="form-check-input" type="checkbox" id="isPremium" checked>
+                      <% else %>
+                      <input class="form-check-input" type="checkbox" id="isPremium" >
+                      <% end %>
+                      <label class="form-check-label" for="Premium">Premium</label>
                     </div>
-                  </div>
-                </form>
-              </div>
+
+
+                    <% end %>
+                    <div class="form-group row">
+                      <label class="col-lg-3 col-form-label form-control-label"></label>
+                      <div class="col-lg-9">
+                        <input id="submitBtn" type="button" class="btn btn-primary" value="Save Changes">
+                      </div>
+                    </div>
+                  </form>
+                </div>
               <% end %>
             </div>
           </div>
@@ -218,6 +239,7 @@ type="text/javascript"></script>
       <script type="text/javascript">
         $(document).ready(function() {
           $('#submitBtn').click(function(evt) {
+            console.log("coucou")
             var $self = $(this);
             var brands = $('#skillsSelect option:selected');
             var selected = [];
@@ -229,23 +251,33 @@ type="text/javascript"></script>
             $(tab).each(function(index, tmp){
               removeSelected.push($(this).val());
             });
-            $.post('/profil', {
-              description: document.getElementById("description").value,
-              hobbies: document.getElementById("hobbies").value,
-              company: document.getElementById("company").value,
-              street: document.getElementById("street").value,
-              city: document.getElementById("city").value,
-              state: document.getElementById("state").value,
-              resume: document.getElementById("resume").value,
-              isPremium: $('#isPremium:checked').val(),
-              off: $('#off:checked').val(),
-              onsoft: $('#on-soft:checked').val(),
-              onhard: $('#on-hard:checked').val(),
-              skills: selected,
-              removeSkills: removeSelected
-            },function(response) {
-              window.location.href="/profil/-1";
-            });
+            if (<%= @currentUser.isRecruiter %>){
+              $.post('/profil', {
+                description: document.getElementById("description").value,
+                enterprise: document.getElementById("enterprise").value
+              },function(response) {
+                window.location.href="/profil/-1";
+              });
+            }
+            else {
+              $.post('/profil', {
+                description: document.getElementById("description").value,
+                hobbies: document.getElementById("hobbies").value,
+                company: document.getElementById("company").value,
+                street: document.getElementById("street").value,
+                city: document.getElementById("city").value,
+                state: document.getElementById("state").value,
+                resume: document.getElementById("resume").value,
+                isPremium: $('#isPremium:checked').val(),
+                off: $('#off:checked').val(),
+                onsoft: $('#on-soft:checked').val(),
+                onhard: $('#on-hard:checked').val(),
+                skills: selected,
+                removeSkills: removeSelected
+              },function(response) {
+                window.location.href="/profil/-1";
+              });
+            }
           });
         });
       </script>
