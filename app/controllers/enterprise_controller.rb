@@ -39,7 +39,13 @@ class EnterpriseController < ApplicationController
   end
 
   def create
-    uidOffer = params[:title].clone.gsub!(/[@.-_ ]/, '@' => "at", '.' => '', '-' => '', '_' => '', ' ' => '') + ((User.where("email= ?", @var.Email).first).id).to_s
+    mytitle = params[:title].clone.gsub!(/[@.-_ ]/, '@' => "at", '.' => '', '-' => '', '_' => '', ' ' => '')
+    uidOffer = ""
+    if mytitle
+      uidOffer = mytitle + ((User.where("email= ?", @var.Email).first).id).to_s
+    else
+      uidOffer = params[:title] + ((User.where("email= ?", @var.Email).first).id).to_s
+    end
     o = Offer.create title: params[:title], description: params[:description], recruiter_id: User.where(email: @var.Email).first.id, identifier: uidOffer.downcase
     CometChatService.new(
       uid: uidOffer.downcase,
