@@ -114,9 +114,9 @@ class EnterpriseController < ApplicationController
     end
     skillsRemoved = params[:removeSkills]
     if skillsRemoved
-      skillsRemoved.each do |elt|
-        idToRemove = Skill.where(name: elt).first.id
-        SkillUser.where(user_id: @currentUser.id, skill_id: idToRemove).first.delete
+      skillsRemoved.each do |skillRemoved|
+        idToRemove = Skill.where(name: skillRemoved).first.id
+        SkillOffer.where(offer_id: o.id, skill_id: idToRemove).first.delete
       end
     end
     redirect_to "/enterprise/#{params[:id]}"
