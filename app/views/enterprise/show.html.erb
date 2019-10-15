@@ -9,17 +9,18 @@
 
 <p>Postulants:<p>
 <% @offer.applications.each do |application| %>
-  <%= application.percentage %>%
-  : <%= User.find(application.user_id).name %>
+  <p><%= application.percentage %>% : <%= User.find(application.user_id).name %></p>
+  <% if(!application.isAccepted) %>
+    <input class="acceptApplicant" type="button" class="btn btn-primary" value="Accept" id="<%= application.user_id %>">
+  <% end %>
 <% end %>
 
 <p>Suggestions:<p>
 <p><% for i in 0...@maxPrinted %><p>
   <%= @percentages[i] %>%
-  <a href=<%= "/profil/#{@suggestions[i].id}" %>><%= @suggestions[i].name %></a>
+  <p><a href=<%= "/profil/#{@suggestions[i].id}" %>><%= @suggestions[i].name %></a> : <%= @suggestions[i].name %></p>
+  <input class="acceptSuggestion" type="button" class="btn btn-primary" value="Accept" id="<%= @suggestions[i].id %>">
 <% end %>
-
-
 
 <p><a href=<%= "/enterprise/delete/#{@offer.id}" %>>Delete offer</a></p>
 
@@ -28,3 +29,26 @@
 <% else %>
   <p>Can't update anymore<p>
 <% end %>
+
+<p><a href=<%= "/chat/#{@offer.id}" %>>Chat</a></p>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.acceptSuggestion').click(function(evt) {
+      $.post('/enterprise/acceptSuggestion', {
+        idAcceptSuggestion: evt.target.id,
+        idOffer: <%= @offer.id %>
+      },function(response) {
+        window.location.href="/enterprise/<%= @offer.id %>";
+      });
+    });
+    $('.acceptApplicant').click(function(evt) {
+      $.post('/enterprise/acceptApplicant', {
+        idAcceptApplicant: evt.target.id,
+        idOffer: <%= @offer.id %>
+      },function(response) {
+        window.location.href="/enterprise/<%= @offer.id %>";
+      });
+    });
+  });
+</script>
