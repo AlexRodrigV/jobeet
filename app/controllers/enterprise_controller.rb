@@ -31,7 +31,9 @@ class EnterpriseController < ApplicationController
 
     @enterprise.users.each do |userEnterprise|
       Offer.where(recruiter_id: userEnterprise.id).each do |offer|
-        @enterpriseOffers.push(offer)
+        if userEnterprise.id != recruiter.id
+          @enterpriseOffers.push(offer)
+        end
       end
     end
   end
