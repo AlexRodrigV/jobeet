@@ -9,8 +9,10 @@
 
 <p>Postulants:<p>
 <% @offer.applications.each do |application| %>
-  <%= application.percentage %>%
-  : <%= User.find(application.user_id).name %>
+  <p><%= application.percentage %>% : <%= User.find(application.user_id).name %></p>
+  <% if(!application.isAccepted) %>
+    <input class="acceptApplicant" type="button" class="btn btn-primary" value="Accept" id="<%= application.user_id %>">
+  <% end %>
 <% end %>
 
 
@@ -19,11 +21,6 @@
   <%= elt[1] %>%
   <a href=<%= "/profil/#{elt[0]}" %>><%= elt[0].name %></a>
 <% end %>
-
-<p><%= @test[0] %><p>
-  <p><%= @test[1] %><p>
-    <p><%= @test[2] %><p>
-      <p><%= @test[3] %><p>
 
 
 
@@ -34,3 +31,26 @@
 <% else %>
   <p>Can't update anymore<p>
 <% end %>
+
+<p><a href=<%= "/chat/#{@offer.id}" %>>Chat</a></p>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.acceptSuggestion').click(function(evt) {
+      $.post('/enterprise/acceptSuggestion', {
+        idAcceptSuggestion: evt.target.id,
+        idOffer: <%= @offer.id %>
+      },function(response) {
+        window.location.href="/enterprise/<%= @offer.id %>";
+      });
+    });
+    $('.acceptApplicant').click(function(evt) {
+      $.post('/enterprise/acceptApplicant', {
+        idAcceptApplicant: evt.target.id,
+        idOffer: <%= @offer.id %>
+      },function(response) {
+        window.location.href="/enterprise/<%= @offer.id %>";
+      });
+    });
+  });
+</script>

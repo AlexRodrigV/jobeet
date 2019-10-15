@@ -15,12 +15,16 @@ Rails.application.routes.draw do
   patch 'enterprise/:id' => 'enterprise#update'
   get 'enterprise/update/:id' => 'enterprise#change'
   post 'enterprise/update' => 'enterprise#update'
+  post 'enterprise/acceptSuggestion' => 'enterprise#acceptSuggestion'
+  post 'enterprise/acceptApplicant' => 'enterprise#acceptApplicant'
 
 
   get 'profil/:id' => 'profil#index'
 
   get 'home/index'
   get 'chat/index', to: 'chat#index'
+  get 'chat/:id', to: 'chat#index'
+
   get 'sessions/index'
   # Routes for Google authentication
   get 'auth/:provider/callback', to: 'sessions#googleAuth'

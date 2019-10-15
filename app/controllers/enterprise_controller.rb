@@ -108,5 +108,16 @@ class EnterpriseController < ApplicationController
     redirect_to "/enterprise/#{params[:id]}"
   end
 
+  def acceptSuggestion
+    idAcceptedUser = params[:idAcceptSuggestion]
+    tmp = User.find(idAcceptedUser).email.clone.gsub!(/[@.-_]/, '@' => "at", '.' => '', '-' => '', '_' => '').downcase
+    Application.create offer_id: params[:idOffer], user_id: idAcceptedUser, percentage: getPercentage(params[:idOffer], idAcceptedUser), idchatuser: tmp, idchatoffer: Offer.find(params[:idOffer]).identifier, isAccepted: true
+  end
+
+  def acceptApplicant
+    idAcceptedUser = params[:idAcceptApplicant]
+    tmp = User.find(idAcceptedUser).email.clone.gsub!(/[@.-_]/, '@' => "at", '.' => '', '-' => '', '_' => '').downcase
+    Application.where(offer_id: params[:idOffer], user_id: idAcceptedUser).first.update_columns(isAccepted: true)
+  end
 
 end

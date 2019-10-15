@@ -14,7 +14,7 @@ class User < ApplicationRecord
       user.image = auth.info.image
       user.isRecruiter = @var.role == 2
       new_user = CometChatService.new(
-        uid: tmp.gsub!(/[@.-_]/, '@' => "at", '.' => '', '-' => '', '_' => ''),
+        uid: tmp.gsub!(/[@.-_]/, '@' => "at", '.' => '', '-' => '', '_' => '').downcase,
         name: auth.info.name
       ).create_user
     end

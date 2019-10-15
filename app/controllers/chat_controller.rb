@@ -1,7 +1,13 @@
 class ChatController < ApplicationController
   def index
+    @chatLoggedName = @var.Username
+    @chatLoggedId = @var.Email.clone.gsub!(/[@.-_]/, '@' => "at", '.' => '', '-' => '', '_' => '').downcase
+    if @var.role == 2
+      @chatLoggedName = Offer.find(params[:id]).title
+      @chatLoggedId = Offer.find(params[:id]).identifier
+    end
     users = CometChatService.new.fetch_users
-    emailchat = @var.Email.clone.gsub!(/[@.-_]/, '@' => "at", '.' => '', '-' => '', '_' => '')
+    emailchat = @var.Email.clone.gsub!(/[@.-_]/, '@' => "at", '.' => '', '-' => '', '_' => '').downcase
     @users = users.reject { |u| u[:id] == emailchat }
     if @var.role == 1
       users.each do |elt|
@@ -10,9 +16,11 @@ class ChatController < ApplicationController
         end
       end
     else
-      tmp = []
-
-      puts(tmp)
+      users.each do |elt|
+        if !Application.where(idchatuser: elt[:id], idchatoffer: @chatLoggedId, isAccepted: true).exists?
+          @users = @users.reject { |u| u[:id] == elt[:id] }
+        end
+      end
     end
   end
 
