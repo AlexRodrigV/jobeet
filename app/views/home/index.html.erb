@@ -8,7 +8,12 @@
   </button>
   <%= link_to 'Test for Annuaire', controller: 'annuaire' %>
 <% else %>
-  <p> That's my boy !</p>
+  <p> Welcome to Jobeet !</p>
+  <% if @firstConnection %>
+    <input id="enterprise" class="form-control" type="text" placeholder="enterprise">
+    <input id="submitBtn" type="button" class="btn btn-primary" value="add enterprise">
+  <% end %>
+
 <% end %>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -47,6 +52,14 @@
       var $self = $(this);
       $.post('/home/recruiter', function(response) {
         window.location.href='http://localhost:3000/auth/google_oauth2';
+      });
+    });
+    $('#submitBtn').click(function(evt) {
+      var $self = $(this);
+      $.post('/home/addEnterprise', {
+        name: document.getElementById("enterprise").value
+      }, function(response) {
+        window.location.href='/home/index/';
       });
     });
   });

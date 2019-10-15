@@ -25,10 +25,11 @@ class EnterpriseController < ApplicationController
   end
 
   def index
-    @enterprise = Enterprise.find(1)
+    recruiter = User.where(email: GlobalData.find(1).Email).first
+    @enterprise = Enterprise.find(recruiter.enterprise_id)
     @enterpriseOffers = []
-    enterprise_id = User.where(email: @var.Email).first.enterprise_id
-    Enterprise.find(enterprise_id).users.each do |userEnterprise|
+
+    @enterprise.users.each do |userEnterprise|
       Offer.where(recruiter_id: userEnterprise.id).each do |offer|
         @enterpriseOffers.push(offer)
       end

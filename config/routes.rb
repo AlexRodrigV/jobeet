@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  post 'home/addEnterprise'
+
   get 'offers' => 'offers#home'
   get 'offers/:id' => 'offers#show'
   patch 'offers/:id' => 'offers#apply'
