@@ -67,7 +67,12 @@ class EnterpriseController < ApplicationController
   end
 
   def delete
-    Offer.find(params[:id]).destroy
+    o = Offer.find(params[:id])
+    Application.where(offer_id: o.id).each do |application|
+      application.delete
+    end
+    o.delete
+
     redirect_to '/enterprise'
   end
 
