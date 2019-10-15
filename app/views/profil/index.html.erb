@@ -204,7 +204,7 @@ type="text/javascript"></script>
             </div>
           </div>
           <div class="col-lg-4 order-lg-1 text-center">
-            <img src=<%= @currentUser.image %> style="max-width:75%;" class="mx-auto rounded-circle d-block" alt="avatar">
+            <img style="max-width:75%;" class="mx-auto rounded-circle d-block" alt="avatar" src=<%= @currentUser.image %> >
           </div>
         </div>
       </div>
@@ -214,10 +214,6 @@ type="text/javascript"></script>
           min-width: 200px;
         }
       </style>
-
-
-
-
 
       <script type="text/javascript">
         $(document).ready(function() {
@@ -249,7 +245,6 @@ type="text/javascript"></script>
               removeSkills: removeSelected
             },function(response) {
               window.location.href="/profil/-1";
-              console.log(selected)
             });
           });
         });

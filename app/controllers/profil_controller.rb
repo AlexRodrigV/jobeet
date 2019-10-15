@@ -11,7 +11,6 @@ class ProfilController < ApplicationController
     end
     @availableSkills = []
     @skills.each do |elt|
-      puts(elt.name)
       if (!@notAvailableSkills.include?(elt.name))
         @availableSkills.push(elt.name)
       end

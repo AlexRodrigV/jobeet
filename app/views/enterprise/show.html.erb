@@ -2,13 +2,13 @@
 
 <h1><%= @offer.title %></h1>
 
-<p>postulants:<p>
+<p>Postulants:<p>
 <% @offer.applications.each do |application| %>
   <%= application.percentage %>%
   : <%= User.find(application.user_id).name %>
 <% end %>
 
-<p>suggestions:<p>
+<p>Suggestions:<p>
 <p><% for i in 0...@maxPrinted %><p>
   <%= @percentages[i] %>%
   <p><a href=<%= "/profil/#{@suggestions[i].id}" %>><%= @suggestions[i].name %></a></p>
