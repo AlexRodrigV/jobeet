@@ -55,33 +55,15 @@ class EnterpriseController < ApplicationController
   def show
     @offer = Offer.find(params[:id])
     users = User.where.not(isRecruiter: true, situation: 0)
-    @maxPrinted = [10, users.length - Application.where(offer_id: @offer.id).length].min
-    @percentages = Array.new(@maxPrinted, 0)
-    @suggestions = Array.new(@maxPrinted, nil)
+    @test = Array.new()
+    @suggestions = Hash.new(0)
     users.each do |user|
-      if (Application.where(user_id: user.id, offer_id: @offer.id).exists? == false)
-        percentage = getPercentage(@offer.id, user.id)
-        if (percentage >= @percentages.last)
-          @percentages[@maxPrinted-1] = percentage
-          @suggestions[@maxPrinted-1] = user
-          for i in ((@maxPrinted-2).downto(0))
-            if percentage < @percentages[i]
-              @percentages[i+1] = percentage
-              @suggestions[i+1] = user
-              break
-            elsif i == 0
-              @percentages[i+1] = @percentages[i]
-              @suggestions[i+1] = @suggestions[i]
-              @percentages[i] = percentage
-              @suggestions[i] = user
-            else
-              @percentages[i+1] = @percentages[0]
-              @suggestions[i+1] = @suggestions[0]
-            end
-          end
-        end
+      if Application.where(user_id: user.id, offer_id: @offer.id).exists? == false
+        @suggestions[user] = getPercentage(@offer.id, user.id)
       end
-    @applications = Application.all.order(:percentage)
+    end
+    @suggestions = @sugestions = @suggestions.sort_by { |k,v| v }.reverse
+
   end
 
   def delete
@@ -127,5 +109,4 @@ class EnterpriseController < ApplicationController
   end
 
 
-end
 end

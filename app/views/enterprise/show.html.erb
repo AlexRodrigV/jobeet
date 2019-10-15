@@ -13,11 +13,17 @@
   : <%= User.find(application.user_id).name %>
 <% end %>
 
+
 <p>Suggestions:<p>
-<p><% for i in 0...@maxPrinted %><p>
-  <%= @percentages[i] %>%
-  <a href=<%= "/profil/#{@suggestions[i].id}" %>><%= @suggestions[i].name %></a>
+<p><% @suggestions.each do |elt| %><p>
+  <%= elt[1] %>%
+  <a href=<%= "/profil/#{elt[0]}" %>><%= elt[0].name %></a>
 <% end %>
+
+<p><%= @test[0] %><p>
+  <p><%= @test[1] %><p>
+    <p><%= @test[2] %><p>
+      <p><%= @test[3] %><p>
 
 
 
