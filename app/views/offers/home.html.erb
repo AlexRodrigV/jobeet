@@ -17,7 +17,7 @@
           <td><%= Enterprise.find(User.find(@offers[i].recruiter_id).enterprise_id).name %></td>
           <td><%= @offers[i].title %></td>
           <td><%= @percentages[i] %></td>
-          <td><a href="/offers/<%= @offers[i].id %>"><button type="button" class="btn btn-success">See the offer</button></a></td>
+          <td><a style="color: #FFFFFF;" href="/offers/<%= @offers[i].id %>"><button type="button" class="btn btn-success">See the offer</button></a></td>
         </tr>
       <% end %>
     <% else %>
@@ -26,7 +26,7 @@
             <td><%= Enterprise.find(User.find(offer.recruiter_id).enterprise_id).name %></td>
             <td><%= offer.title %></td>
             <td>Be premium for that !</td>
-            <td><button type="button" class="btn btn-success"><a href="/offers/<%= offers.id %>">See the offer</a></button></td>
+            <td><button type="button" class="btn btn-success"><a style="color: #FFFFFF;" href="/offers/<%= offer.id %>">See the offer</a></button></td>
           </tr>
         <% end %>
     <% end %>
