@@ -10,6 +10,10 @@
             includeSelectAllOption: true,
             maxHeight: "400",
         });
+        $('#removeSkillsSelect').multiselect({
+          includeSelectAllOption: true,
+          maxHeight: "400",
+        });
     });
 </script>
 
@@ -21,10 +25,20 @@
 </div>
 
 <p><select id="skillsSelect" class="selectpicker show-menu-arrow form-control" multiple>
-  <% @skills.each do |elt|%>
-    <option><%= elt.name %></option>
+  <% @availableSkills.each do |skillName|%>
+    <option><%= skillName %></option>
   <% end %>
 </select><p>
+
+
+  <label class="col-lg-3 col-form-label form-control-label">Skills to remove</label>
+  <div style="padding-left: 20px;">
+    <select id="removeSkillsSelect" class="selectpicker show-menu-arrow form-control" multiple>
+      <% @notAvailableSkills.each do |elt|%>
+        <option><%= elt %></option>
+      <% end %>
+    </select>
+  </div>
 
 <input id="submitBtn" type="button" class="btn btn-primary" value="Update offer">
 
@@ -47,11 +61,17 @@
       $(brands).each(function(index, brand){
           selected.push($(this).val());
       });
+      var tab = $('#removeSkillsSelect option:selected');
+      var removeSelected = [];
+      $(tab).each(function(index, tmp){
+        removeSelected.push($(this).val());
+      });
       $.post('/enterprise/update/', {
         id: id,
         title: document.getElementById("title").value,
         description: document.getElementById("description").value,
-        skills: selected
+        skills: selected,
+        removeSkills: removeSelected
       },function(response) {
         window.location.href="/enterprise/" + id;
       });

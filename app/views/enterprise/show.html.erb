@@ -1,6 +1,11 @@
 <%= render 'home/navbar' %>
 
 <h1><%= @offer.title %></h1>
+<p>Description : <%= @offer.description %><p>
+<p>Skills:<p>
+<% @offer.skillOffers.each do |skillOffer| %>
+  <a href="#" class="badge badge-dark badge-pill"><%= Skill.find(skillOffer.skill_id).name %></a>
+<% end %>
 
 <p>Postulants:<p>
 <% @offer.applications.each do |application| %>
@@ -11,8 +16,7 @@
 <p>Suggestions:<p>
 <p><% for i in 0...@maxPrinted %><p>
   <%= @percentages[i] %>%
-  <p><a href=<%= "/profil/#{@suggestions[i].id}" %>><%= @suggestions[i].name %></a></p>
-  : <%= @suggestions[i].name %>
+  <a href=<%= "/profil/#{@suggestions[i].id}" %>><%= @suggestions[i].name %></a>
 <% end %>
 
 

@@ -91,6 +91,18 @@ class EnterpriseController < ApplicationController
 
   def change
     @offer = Offer.find(params[:id])
+
+    @notAvailableSkills = []
+    @offer.skills.each do |skill|
+      @notAvailableSkills.push(skill.name)
+    end
+
+    @availableSkills = []
+    Skill.all.each do |skill|
+      if (!@notAvailableSkills.include?(skill.name))
+        @availableSkills.push(skill.name)
+      end
+    end
   end
 
   def update
@@ -102,6 +114,13 @@ class EnterpriseController < ApplicationController
     if (skills)
       skills.each do |skill|
         SkillOffer.create offer_id:o.id, skill_id:Skill.where(name:skill).first.id
+      end
+    end
+    skillsRemoved = params[:removeSkills]
+    if skillsRemoved
+      skillsRemoved.each do |elt|
+        idToRemove = Skill.where(name: elt).first.id
+        SkillUser.where(user_id: @currentUser.id, skill_id: idToRemove).first.delete
       end
     end
     redirect_to "/enterprise/#{params[:id]}"
