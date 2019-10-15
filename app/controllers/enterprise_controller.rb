@@ -26,10 +26,17 @@ class EnterpriseController < ApplicationController
 
   def index
     @enterprise = Enterprise.find(1)
+    @enterpriseOffers = []
+    enterprise_id = User.where(email: @var.Email).first.enterprise_id
+    Enterprise.find(enterprise_id).users.each do |userEnterprise|
+      Offer.where(recruiter_id: userEnterprise.id).each do |offer|
+        @enterpriseOffers.push(offer)
+      end
+    end
   end
 
   def create
-    o = Offer.create title: params[:title], description: params[:description], recruiter_id:GlobalData.find(1).user_id, identifier: params[:title] + ((User.where("email= ?", @var.Email).first).id).to_s
+    o = Offer.create title: params[:title], description: params[:description], recruiter_id: User.where(email: @var.Email).first.id, identifier: params[:title] + ((User.where("email= ?", @var.Email).first).id).to_s
     CometChatService.new(
       uid: params[:title] + ((User.where("email= ?", @var.Email).first).id).to_s,
       name: o.title

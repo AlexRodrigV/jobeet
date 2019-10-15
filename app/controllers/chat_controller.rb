@@ -11,15 +11,7 @@ class ChatController < ApplicationController
       end
     else
       tmp = []
-      enterprise_id = User.where(email: @var.Email).first.enterprise_id
-      Enterprise.find(enterprise_id).users.each do |userEnterprise|
-        Offer.where(recruiter_id: userEnterprise.id).each do |offer|
-          tmp.push(users.find { |u| u[:id] == offer.identifier })
-          if Application.where(idchatoffer: offer.identifier).exists?
-            puts(users.find { |u| u[:id] == offer.identifier })
-          end
-        end
-      end
+
       puts(tmp)
     end
   end

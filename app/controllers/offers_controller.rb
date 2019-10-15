@@ -21,7 +21,7 @@ class OffersController < ApplicationController
   def apply
     offerId = params[:id]
     applicantId = User.where(email: GlobalData.find(1).Email).first.id
-    tmp = User.where(email: GlobalData.find(1).Email).first.email.gsub!(/[@.-_]/, '@' => "at", '.' => '', '-' => '', '_' => '')
+    tmp = User.where(email: GlobalData.find(1).Email).first.email.clone.gsub!(/[@.-_]/, '@' => "at", '.' => '', '-' => '', '_' => '')
     Application.create offer_id: offerId, user_id: applicantId, percentage: getPercentage(offerId, applicantId), idchatuser: tmp, idchatoffer: Offer.find(params[:id]).identifier, isAccepted: false
     redirect_to "/offers/"
   end

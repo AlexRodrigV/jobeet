@@ -1,15 +1,14 @@
 <%= render 'home/navbar' %>
 
 <h1><%= @enterprise.name %></h1>
-<% @enterprise.users.each do |recruiter| %>
-  <p><h3>My offers</h3><p>
-  <% Offer.where(recruiter_id: recruiter.id).each do |offer| %>
-    <p><a href="/enterprise/<%=offer.id%>"><%= offer.title %></a></p>
-  <% end %>
-  <p><h3>Enterprise's offers</h3><p>
-  <% Offer.where.not(recruiter_id: recruiter.id).each do |offer| %>
-    <p><a href="/enterprise/<%=offer.id%>"><%= offer.title %></a></p>
-  <% end %>
+<p><h3>My offers</h3><p>
+<% Offer.where(recruiter_id: User.where(email: @var.Email).first.id).each do |offer| %>
+  <p><a href="/enterprise/<%=offer.id%>"><%= offer.title %></a></p>
 <% end %>
+<p><h3>Enterprise's offers</h3><p>
+<% @enterpriseOffers.each do |offer| %>
+  <p><a href="/enterprise/<%=offer.id%>"><%= offer.title %></a></p>
+<% end %>
+
 
 <p><a href="/enterprise/newOffer">Create new offer</a></p>
