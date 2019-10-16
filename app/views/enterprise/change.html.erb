@@ -19,37 +19,39 @@
 
 <%= render 'home/navbar' %>
 
+<h1 style="text-align: center; padding-top: 30px; padding-bottom: 30px;"><b><u>Update of: <%= @offer.title %></u></b></h1>
+
 <div class="col-lg-3">
-  <input id="title" class="form-control" type="text" placeholder="Title">
-  <input id="description" class="form-control" type="text" placeholder="Description">
-</div>
-
-<p><select id="skillsSelect" class="selectpicker show-menu-arrow form-control" multiple>
-  <% @availableSkills.each do |skillName|%>
-    <option><%= skillName %></option>
-  <% end %>
-</select><p>
-
-
-  <label class="col-lg-3 col-form-label form-control-label">Skills to remove</label>
-  <div style="padding-left: 20px;">
-    <select id="removeSkillsSelect" class="selectpicker show-menu-arrow form-control" multiple>
-      <% @notAvailableSkills.each do |elt|%>
-        <option><%= elt %></option>
-      <% end %>
-    </select>
+  <label><b>You can't change the title</b></label>
+  <input id="title" class="form-control" type="text" placeholder="Title" disabled value="<%= @offer.title %>">
+  <br />
+  <label><b>Update the description</b></label>
+  <input id="description" class="form-control" type="text" placeholder="Description" value="<%= @offer.description %>">
+  <br />
+  <label><b>Add skills</b></label>
+  <select id="skillsSelect" class="selectpicker show-menu-arrow form-control" multiple>
+    <% @availableSkills.each do |skillName|%>
+      <option><%= skillName %></option>
+    <% end %>
+  </select>
+  <br />
+  <label><b>Remove skills</b></label>
+  <select id="removeSkillsSelect" class="selectpicker show-menu-arrow form-control" multiple>
+    <% @notAvailableSkills.each do |elt|%>
+      <option><%= elt %></option>
+    <% end %>
+  </select>
+  <br />
+  <div style="text-align: center; margin-top: 15px;">
+    <input  id="submitBtn" type="button" class="btn btn-success" value="Update Offer">
   </div>
-
-<input id="submitBtn" type="button" class="btn btn-primary" value="Update offer">
+</div>
 
 <style>
   .dropdown-menu {
     min-width: 200px;
   }
 </style>
-
-
-
 
 <script type="text/javascript">
   $(document).ready(function() {

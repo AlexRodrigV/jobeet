@@ -2,18 +2,21 @@
 
 <h1> Hello, <%= @var.isConnected ? @var.Username : "unknown beautiful user"%> ! </h1>
 <% if !@var.isConnected %>
-  <p> Sign In in order to discover a world full of magic.... ;) </p>
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  <p> Sign In in order to discover a world full of magic </p>
+  <div class="col-lg-3">
+  <button style="text-align: center;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
     Sign In
   </button>
-  <%= link_to 'Test for Annuaire', controller: 'annuaire' %>
+  </div>
 <% else %>
+  <div style="margin-left: 5%;"">
   <p> Welcome to Jobeet !</p>
   <% if @firstConnection  and  @var.role == 2 %>
-    <input id="enterprise" class="form-control" type="text" placeholder="enterprise">
-    <input id="submitBtn" type="button" class="btn btn-primary" value="add enterprise">
+  <p> This is your first connection as a recruiter, you must choose an enterprise below:</p>
+    <input style="width: 10%;" id="enterprise" class="form-control" type="text" placeholder="enterprise">
+    <input style="margin-top: 15px;" id="submitBtn" type="button" class="btn btn-primary" value="Join an enterprise">
   <% end %>
-
+  </div>
 <% end %>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

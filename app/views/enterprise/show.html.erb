@@ -1,38 +1,85 @@
 <%= render 'home/navbar' %>
 
-<h1><%= @offer.title %></h1>
-<p>Description : <%= @offer.description %><p>
-<p>Skills:<p>
-<% @offer.skillOffers.each do |skillOffer| %>
-  <a href="#" class="badge badge-dark badge-pill"><%= Skill.find(skillOffer.skill_id).name %></a>
-<% end %>
+<h1 style="text-align: center; padding-top: 30px; padding-bottom: 30px;"><b><u><%= @offer.title %></u></b></h1>
 
-<p>Postulants:<p>
-<% @offer.applications.each do |application| %>
-  <p><%= application.percentage %>% : <%= User.find(application.user_id).name %></p>
-  <% if(!application.isAccepted) %>
-    <input class="acceptApplicant" type="button" class="btn btn-primary" value="Accept" id="<%= application.user_id %>">
+<div>
+  <h3 style="display: inline-block;"><b>Description:</b></h3>
+  <h5 style="display: inline-block;"><%= @offer.description %></h5>
+</div>
+<div>
+  <h3 style="display: inline-block;"><b>Skills:</b></h3>
+  <% @offer.skillOffers.each do |skillOffer| %>
+    <a style="display: inline-block;" href="#" class="badge badge-dark badge-pill"><%= Skill.find(skillOffer.skill_id).name %></a>
   <% end %>
-<% end %>
+</div>
 
+<p style="margin-top: 30px;"><h3>Applicants</h3><p>
+<table class="table">
+  <thead>
+    <tr bgcolor="#D3D3D3" style="text-align: center;">
+      <th scope="col">Candidate</th>
+      <th scope="col">Percentage</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @offer.applications.each do |application| %>
+      <tr>
+        <td style="text-align: center;"><a href=<%= "/profil/#{application.user_id}" %>><%= User.find(application.user_id).name %></a></td>
+        <td style="text-align: center;"><%= application.percentage %>%</td>
+        <td style="text-align: center;">
+          <% if(!application.isAccepted) %>
+            <button class="acceptApplicant btn btn-success" id="<%= application.user_id %>">Accept</button>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-<p>Suggestions:<p>
-<p><% @suggestions.each do |elt| %><p>
-  <%= elt[1] %>%
-  <a href=<%= "/profil/#{elt[0]}" %>><%= elt[0].name %></a>
-<% end %>
+<p><h3>Suggestions</h3><p>
+<table class="table">
+  <thead>
+    <tr bgcolor="#D3D3D3" style="text-align: center;">
+      <th scope="col">Candidate</th>
+      <th scope="col">Percentage</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+      <% @suggestions.each do |elt| %>
+      <tr>
+        <td style="text-align: center;"><a href=<%= "/profil/#{elt[0].id}" %>><%= elt[0].name %></a></td>
+        <td style="text-align: center;"><%= elt[1] %>%</td>
+        <td style="text-align: center;">
+            <button class="acceptSuggestion btn btn-success" id="<%= elt[0].id %>">Accept</button>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
+<div class="striped-border"></div>
 
+<div style="text-align: center;">
+  <button style="display: inline-block; margin-right: 15px;" class="btn btn-success"><a style="color: #FFFFFF;" href=<%= "/enterprise/delete/#{@offer.id}" %>>Delete offer</a></button>
+  <% if (@offer.nbModifications < 2) %>
+    <button style="display: inline-block; margin-right: 15px;" class="btn btn-success"><a style="color: #FFFFFF;" href=<%= "/enterprise/update/#{@offer.id}" %>>Update offer</a></button>
+  <% else %>
+    <p style="display: inline-block; margin-right: 15px;">Can't update anymore</p>
+  <% end %>
+  <button style="display: inline-block;" class="btn btn-success"><a style="color: #FFFFFF;" href=<%= "/chat/#{@offer.id}" %>>Chat</a></button>
+</div>
 
-<p><a href=<%= "/enterprise/delete/#{@offer.id}" %>>Delete offer</a></p>
-
-<% if (@offer.nbModifications < 2) %>
-  <p><a href=<%= "/enterprise/update/#{@offer.id}" %>>Update offer</a></p>
-<% else %>
-  <p>Can't update anymore<p>
-<% end %>
-
-<p><a href=<%= "/chat/#{@offer.id}" %>>Chat</a></p>
+<style>
+  .striped-border {
+      border: 1px dashed #000;
+      width: 50%;
+      margin: auto;
+      margin-top: 30px;
+      margin-bottom: 30px;
+  }
+</style>
 
 <script type="text/javascript">
   $(document).ready(function() {
