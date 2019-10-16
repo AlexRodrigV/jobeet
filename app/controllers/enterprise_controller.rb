@@ -78,6 +78,7 @@ class EnterpriseController < ApplicationController
   def delete
     o = Offer.find(params[:id])
     Application.where(offer_id: o.id).each do |application|
+      MailsMailer.deleteOffer(o, User.find(application.user_id)).deliver_now
       application.delete
     end
     o.delete
@@ -130,18 +131,21 @@ class EnterpriseController < ApplicationController
   end
 
   def acceptSuggestion
+    MailsMailer.acceptUser(Offer.find(params[:idOffer]), User.find(params[:idAcceptSuggestion])).deliver_now
     idAcceptedUser = params[:idAcceptSuggestion]
     tmp = User.find(idAcceptedUser).email.clone.gsub!(/[@.-_]/, '@' => "at", '.' => '', '-' => '', '_' => '').downcase
     Application.create offer_id: params[:idOffer], user_id: idAcceptedUser, percentage: getPercentage(params[:idOffer], idAcceptedUser), idchatuser: tmp, idchatoffer: Offer.find(params[:idOffer]).identifier, isAccepted: true
   end
 
   def acceptApplicant
+    MailsMailer.acceptUser(Offer.find(params[:idOffer]), User.find(params[:idAcceptApplicant])).deliver_now
     idAcceptedUser = params[:idAcceptApplicant]
     tmp = User.find(idAcceptedUser).email.clone.gsub!(/[@.-_]/, '@' => "at", '.' => '', '-' => '', '_' => '').downcase
     Application.where(offer_id: params[:idOffer], user_id: idAcceptedUser).first.update_columns(isAccepted: true)
   end
 
   def deleteApplicant
+    MailsMailer.rejectUser(Offer.find(params[:idOffer]), User.find(params[:idDeleteApplicant])).deliver_now
     Application.where(offer_id: params[:idOffer], user_id: params[:idDeleteApplicant]).first.delete
 
   end
