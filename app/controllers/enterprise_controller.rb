@@ -82,7 +82,11 @@ class EnterpriseController < ApplicationController
     end
     o.delete
 
-    redirect_to '/enterprise'
+    if GlobalData.find(1).isAdminConnected
+      redirect_to '/admin'
+    else
+      redirect_to '/enterprise'
+    end
   end
 
   def change

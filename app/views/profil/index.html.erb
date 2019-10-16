@@ -258,13 +258,11 @@ type="text/javascript"></script>
             if (<%= @currentUser.isRecruiter %>){
               $.post('/profil', {
                 description: document.getElementById("description").value,
-                enterprise: document.getElementById("enterprise").value
+                enterprise: document.getElementById("enterprise").value,
+                currentUserId: <%= @currentUser.id %>
               },function(response) {
-                if(<%= GlobalData.find(1).isAdminConnected %>){
-                  window.location.href="/admin";
-                } else {
-                  window.location.href="/profil/-1";
-                }              });
+                  window.location.href="/profil/<%= @currentUser.id %>";
+              });
             }
             else {
               $.post('/profil', {
@@ -280,13 +278,10 @@ type="text/javascript"></script>
                 onsoft: $('#on-soft:checked').val(),
                 onhard: $('#on-hard:checked').val(),
                 skills: selected,
-                removeSkills: removeSelected
+                removeSkills: removeSelected,
+                currentUserId: <%= @currentUser.id %>
               },function(response) {
-                if(<%= GlobalData.find(1).isAdminConnected %>){
-                  window.location.href="/admin";
-                } else {
-                  window.location.href="/profil/-1";
-                }
+                  window.location.href="/profil/<%= @currentUser.id %>";
               });
             }
           });

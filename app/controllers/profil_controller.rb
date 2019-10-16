@@ -18,8 +18,9 @@ class ProfilController < ApplicationController
   end
 
   def edit
-    @currentUser = User.where("email= ?", @var.Email).first
-    userId = @currentUser.id
+
+    userId = params[:currentUserId]
+    @currentUser = User.find(userId)
 
     nameEnterprise = params[:enterprise]
     if nameEnterprise
@@ -35,7 +36,7 @@ class ProfilController < ApplicationController
           Enterprise.create name:nameEnterprise
         end
       end
-      User.where("email= ?", @var.Email).first.update_columns('description': params[:description], 'enterprise_id':Enterprise.where(name: nameEnterprise).first.id)
+      User.find(userId).update_columns('description': params[:description], 'enterprise_id':Enterprise.where(name: nameEnterprise).first.id)
     else
       if(params[:skills])
         params[:skills].each do |skill|
@@ -58,7 +59,7 @@ class ProfilController < ApplicationController
       else
         situation = 2
       end
-      User.where("email= ?", @var.Email).first.update_columns('description': params[:description], 'hobbies': params[:hobbies], 'company': params[:company], 'street': params[:street], 'city': params[:city], 'state': params[:state], 'resume': params[:resume], 'isPremium': params[:isPremium], 'situation': situation)
+      @currentUser.update_columns('description': params[:description], 'hobbies': params[:hobbies], 'company': params[:company], 'street': params[:street], 'city': params[:city], 'state': params[:state], 'resume': params[:resume], 'isPremium': params[:isPremium], 'situation': situation)
     end
   end
 end
