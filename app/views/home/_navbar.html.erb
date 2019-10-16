@@ -1,28 +1,37 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a><%= link_to 'Jobeet', root_path, :style=>'color:#FFFFFF; font-size:25px; font-weight: bold;'%></a>
+  <% if @var.isAdminConnected %>
+    <a><%= link_to 'Jobeet', '/admin', :style=>'color:#FFFFFF; font-size:25px; font-weight: bold;'%></a>
+  <% else %>
+    <a><%= link_to 'Jobeet', root_path, :style=>'color:#FFFFFF; font-size:25px; font-weight: bold;'%></a>
+  <% end%>
 <% if @var.isConnected %>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active" style="padding-left: 5px;">
-        <% if @var.role == 2%>
-          <% if User.where(email: @var.Email).first.enterprise_id != nil %>
-            <a class="nav-link" href="/enterprise">Enterprise</a>
-          <% end %>
+        <% if @var.isAdminConnected %>
+          <a class="nav-link" href="/admin">Admin</a>
         <% else %>
-          <a class="nav-link" href="/offers">Offers</a>
+          <% if @var.role == 2%>
+            <% if User.where(email: @var.Email).first.enterprise_id != nil %>
+              <a class="nav-link" href="/enterprise">Enterprise</a>
+            <% end %>
+          <% else %>
+            <a class="nav-link" href="/offers">Offers</a>
+          <% end %>
+        </li>
+
+        <% if @var.role == 1 %>
+          <li class="nav-item active">
+            <a class="nav-link" href="/chat">Chat</a>
+          </li>
         <% end %>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href=<%= "/profil/#{@currentUserId}" %>>Profile</a>
-      </li>
-      <% if @var.role == 1 %>
         <li class="nav-item active">
-          <a class="nav-link" href="/chat">Chat</a>
+          <a class="nav-link" href="/annuaire/index">Annuaire</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href=<%= "/profil/#{@currentUserId}" %>>Profile</a>
         </li>
       <% end %>
-      <li class="nav-item active">
-        <a class="nav-link" href="/annuaire/index">Annuaire</a>
-      </li>
     </ul>
     <div class="my-2 my-lg-0" id="signout_fct">
       <a href="/"><%= link_to 'Sign Out', root_path, :style=>'color:#FFFFFF;'%></a>
