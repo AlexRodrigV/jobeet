@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   post 'enterprise/update' => 'enterprise#update'
   post 'enterprise/acceptSuggestion' => 'enterprise#acceptSuggestion'
   post 'enterprise/acceptApplicant' => 'enterprise#acceptApplicant'
+  post 'enterprise/deleteApplicant' => 'enterprise#deleteApplicant'
 
 
   get 'profil/:id' => 'profil#index'

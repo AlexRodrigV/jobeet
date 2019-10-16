@@ -134,4 +134,9 @@ class EnterpriseController < ApplicationController
     Application.where(offer_id: params[:idOffer], user_id: idAcceptedUser).first.update_columns(isAccepted: true)
   end
 
+  def deleteApplicant
+    Application.where(offer_id: params[:idOffer], user_id: params[:idDeleteApplicant]).first.delete
+
+  end
+
 end
