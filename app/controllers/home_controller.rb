@@ -29,6 +29,7 @@ class HomeController < ApplicationController
       def signout
         redirect_to :controller => 'home', :action => 'index'
         @var.update('isConnected': false, 'Username': "toto", 'Email': "@", 'role': 0, 'reset': true)
+        GlobalData.find(1).update_columns(isAdminConnected: false)
         return
       end
 

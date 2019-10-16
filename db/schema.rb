@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_14_171903) do
+ActiveRecord::Schema.define(version: 2019_10_16_115825) do
 
   create_table "applications", force: :cascade do |t|
     t.integer "offer_id"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2019_10_14_171903) do
     t.integer "role"
     t.boolean "reset"
     t.string "image"
+    t.boolean "isAdminConnected"
   end
 
   create_table "offers", force: :cascade do |t|

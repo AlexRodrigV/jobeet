@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
       @currentUserId = User.where(email:@var.Email).first.id
     end
     if !@var.reset
-      @var.update('isConnected': false, 'Username': "toto", 'Email': "@", 'role': 0, 'reset': true)
+      @var.update('isConnected': false, 'Username': "toto", 'Email': "@", 'role': 0, 'reset': true, 'isAdminConnected': false)
     end
   end
 end

@@ -28,7 +28,7 @@ type="text/javascript"></script>
         <li class="nav-item">
           <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Profile</a>
         </li>
-        <% if @currentUser.email == GlobalData.find(1).Email %>
+        <% if @currentUser.email == GlobalData.find(1).Email || GlobalData.find(1).isAdminConnected %>
           <li class="nav-item">
             <a href="" data-target="#edit" data-toggle="tab" class="nav-link">Edit</a>
           </li>
@@ -102,7 +102,7 @@ type="text/javascript"></script>
           </div>
           <!--/row-->
         </div>
-        <% if @currentUser.email == GlobalData.find(1).Email %>
+        <% if @currentUser.email == GlobalData.find(1).Email || GlobalData.find(1).isAdminConnected %>
           <div class="tab-pane" id="edit">
             <form role="form">
               <div class="form-group row">
@@ -260,8 +260,11 @@ type="text/javascript"></script>
                 description: document.getElementById("description").value,
                 enterprise: document.getElementById("enterprise").value
               },function(response) {
-                window.location.href="/profil/-1";
-              });
+                if(<%= GlobalData.find(1).isAdminConnected %>){
+                  window.location.href="/admin";
+                } else {
+                  window.location.href="/profil/-1";
+                }              });
             }
             else {
               $.post('/profil', {
@@ -279,7 +282,11 @@ type="text/javascript"></script>
                 skills: selected,
                 removeSkills: removeSelected
               },function(response) {
-                window.location.href="/profil/-1";
+                if(<%= GlobalData.find(1).isAdminConnected %>){
+                  window.location.href="/admin";
+                } else {
+                  window.location.href="/profil/-1";
+                }
               });
             }
           });

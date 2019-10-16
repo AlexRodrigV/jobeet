@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'admin/index'
   post 'home/addEnterprise'
 
   get 'offers' => 'offers#home'
@@ -26,6 +27,10 @@ Rails.application.routes.draw do
   get 'chat/:id', to: 'chat#index'
 
   get 'sessions/index'
+
+  get 'admin' => 'admin#index'
+  post 'admin/connection' => 'admin#connection'
+
   # Routes for Google authentication
   get 'auth/:provider/callback', to: 'sessions#googleAuth'
   get 'auth/failure', to: redirect('/')
