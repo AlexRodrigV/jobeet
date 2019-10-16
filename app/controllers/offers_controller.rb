@@ -1,4 +1,6 @@
 class OffersController < ApplicationController
+  before_action :authorize_applicant
+
   def home
     @offers = Offer.all
     @user = User.where(email: GlobalData.find(1).Email).first

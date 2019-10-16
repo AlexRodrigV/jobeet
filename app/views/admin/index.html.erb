@@ -1,6 +1,3 @@
-
-<%= render 'home/navbar' %>
-
 <% if !GlobalData.find(1).isAdminConnected %>
   <div class="wrapper fadeInDown">
     <div id="formContent">
@@ -16,6 +13,8 @@
     </div>
   </div>
 <% else %>
+<%= render 'home/navbar' %>
+
 <h1 style="text-align: center; padding-top: 30px; padding-bottom: 30px;"><b><u>Admin Dashboard</u></b></h1>
 <p><h3>Offers</h3><p>
 <table class="table">

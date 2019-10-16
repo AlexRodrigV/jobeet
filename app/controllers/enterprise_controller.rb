@@ -1,4 +1,6 @@
 class EnterpriseController < ApplicationController
+before_action :authorize_recruiter
+
   def getPercentage(offerId, applicantId)
     offer = Offer.find(offerId)
 
