@@ -1,5 +1,4 @@
 class ProfilController < ApplicationController
-  before_action -> { authorize_profile(params[:id]) }
 
   def index
     if params[:id] == "-1"

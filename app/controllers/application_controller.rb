@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authorize_profile(id)
-    redirect_to "/" unless (@var.role == 2 || GlobalData.find(1).isAdminConnected || id == "-1" || User.where(email: @var.Email).first.id == id.to_i)
+    redirect_to "/" unless (@var.role == 2 || GlobalData.find(1).isAdminConnected || User.where(email: @var.Email).first.id == id.to_i)
   end
 
   def authorize_applicant
