@@ -1,9 +1,8 @@
 <%= render 'home/navbar' %>
 
 <% content_for :title, @chatLoggedName %>
-<h5 class="mb-1">
-  Currently signed as <%= @chatLoggedName %>
-</h5>
+<h1 style="text-align: center; padding-top: 30px; padding-bottom: 30px;"><b><u>Currently signed as <%= @chatLoggedName %></u></b></h1>
+
 <% flash.each do |key, value| %>
   <div class="alert alert-<%= key %>"><%= value %></div>
 <% end %>
@@ -22,14 +21,8 @@
       </ul>
     </div>
 
-
     <div class="col-sm-8">
       <div class="chatbody">
-        <table class="table">
-          <tr>
-            <td></td>
-          </tr>
-        </table>
         <div id="messages" class="messages">
           Messages loading...
         </div>
@@ -63,6 +56,7 @@
   const displayNewMessage = (currentChatterId, msg) => {
       const userDiv = document.getElementById('user-id');
       const id = userDiv.dataset.id;
+      console.log(currentChatterId);
       if (![currentChatterId, id].includes(msg.sender.uid)) { return; }
       const newNode = document.createElement("div")
       newNode.innerHTML = newMessage(msg, id)
@@ -158,3 +152,28 @@
   initializeChat();
   setUserListeners();
 </script>
+
+<style>
+  .self{
+    background-color: #00BFFF;
+    margin-top: 15px;
+    padding-right:15px;
+    width: 50%;
+    text-align: right;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+  }
+  .false{
+    background-color: #32CD32;
+    margin-top: 15px;
+    padding-left: 15px;
+    width: 50%;
+    text-align: left;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+  }
+</style>
