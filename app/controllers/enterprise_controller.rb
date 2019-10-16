@@ -107,6 +107,9 @@ class EnterpriseController < ApplicationController
 
   def update
     o = Offer.find(params[:id])
+    Application.where(offer_id: params[:id]).each do |application|
+      MailsMailer.updateOffer(o, User.find(application.user_id)).deliver_now
+    end
     o.update nbModifications:o.nbModifications+1
     o.update title: params[:title], description: params[:description]
 
