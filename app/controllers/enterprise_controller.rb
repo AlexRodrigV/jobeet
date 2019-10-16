@@ -1,31 +1,6 @@
 class EnterpriseController < ApplicationController
 before_action :authorize_recruiter
-
-  def getPercentage(offerId, applicantId)
-    offer = Offer.find(offerId)
-
-    applicantSkills = SkillUser.where(user_id: applicantId)
-    offerSkills = SkillOffer.where(offer_id: offerId)
-
-    common = 0
-    offerSkills.each do |skillOffer|
-      offerSkill = Skill.find(skillOffer.skill_id)
-      applicantSkills.each do |applicantSkill|
-        applicantSkill = Skill.find(applicantSkill.skill_id)
-        if (offerSkill.name == applicantSkill.name)
-          common += 1
-        end
-      end
-    end
-
-    if (offerSkills.count == 0)
-      percentage = 100
-    else
-      percentage = common * 100 / offerSkills.count
-    end
-    return percentage
-  end
-
+  
   def index
     recruiter = User.where(email: GlobalData.find(1).Email).first
     @enterprise = Enterprise.find(recruiter.enterprise_id)
@@ -149,6 +124,17 @@ before_action :authorize_recruiter
   def deleteApplicant
     MailsMailer.rejectUser(Offer.find(params[:idOffer]), User.find(params[:idDeleteApplicant])).deliver_now
     Application.where(offer_id: params[:idOffer], user_id: params[:idDeleteApplicant]).first.delete
+  end
+
+  def prepareUpdateEnterprise
+    recruiter = User.where(email: GlobalData.find(1).Email).first
+    @enterprise = Enterprise.find(recruiter.enterprise_id)
+  end
+
+  def updateEnterprise
+    recruiter = User.where(email: GlobalData.find(1).Email).first
+    enterprise = Enterprise.find(recruiter.enterprise_id)
+    enterprise.update_columns(description: params[:description])
 
   end
 

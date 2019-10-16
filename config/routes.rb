@@ -8,8 +8,12 @@ Rails.application.routes.draw do
   patch 'offers/:id' => 'offers#apply'
   post 'offers/:id' => 'offers#unsuscribe'
 
+  get 'enterprise/prepareUpdateEnterprise' => 'enterprise#prepareUpdateEnterprise'
+  post 'enterprise/updateEnterprise' => 'enterprise#updateEnterprise'
+
   get 'enterprise' => 'enterprise#index'
   get 'enterprise/newOffer'
+
   post 'enterprise' => 'enterprise#create'
   get 'enterprise/:id' => 'enterprise#show'
   get 'enterprise/delete/:id' => 'enterprise#delete'
@@ -19,7 +23,6 @@ Rails.application.routes.draw do
   post 'enterprise/acceptSuggestion' => 'enterprise#acceptSuggestion'
   post 'enterprise/acceptApplicant' => 'enterprise#acceptApplicant'
   post 'enterprise/deleteApplicant' => 'enterprise#deleteApplicant'
-
 
   get 'profil/:id' => 'profil#index'
 

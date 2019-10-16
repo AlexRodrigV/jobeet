@@ -28,30 +28,7 @@ class OffersController < ApplicationController
     redirect_to "/offers/"
   end
 
-  def getPercentage(offerId, applicantId)
-    offer = Offer.find(offerId)
-
-    applicantSkills = SkillUser.where(user_id: applicantId)
-    offerSkills = SkillOffer.where(offer_id: offerId)
-
-    common = 0
-    offerSkills.each do |skillOffer|
-      offerSkill = Skill.find(skillOffer.skill_id)
-      applicantSkills.each do |applicantSkill|
-        applicantSkill = Skill.find(applicantSkill.skill_id)
-        if (offerSkill.name == applicantSkill.name)
-          common += 1
-        end
-      end
-    end
-
-    if (offerSkills.count == 0)
-      percentage = 100
-    else
-      percentage = common * 100 / offerSkills.count
-    end
-    return percentage
-  end
+  
 
   def unsuscribe
     offerId = params[:id]
